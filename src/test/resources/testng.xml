@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Java FX Helpers Unit Tests">
+    <test name="FX">
+        <classes>
+            <class name="org.panteleyev.fx.TestReadOnlyStringConverter"/>
+            <class name="org.panteleyev.fx.TestWindowManager"/>
+            <class name="org.panteleyev.fx.TestController"/>
+            <class name="org.panteleyev.fx.TestFxFactory"/>
+        </classes>
+    </test>
+</suite>
