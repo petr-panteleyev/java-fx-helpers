@@ -51,225 +51,160 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 /**
- * This class provides convenience methods to create and configure various JavaFX controls in one method call.
+ * This interface provides convenience methods to create and configure various JavaFX controls in one method call.
  * Most of the methods take resource bundle and text key as parameters for I18N purposes.
  */
-public final class FxFactory {
-
-    private FxFactory() {
+public interface FxFactory {
+    /**
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, EventHandler)}
+     */
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb, String key, EventHandler<ActionEvent> action) {
+        return MenuFactory.newMenuItem(rb, key, action);
     }
 
     /**
-     * Creates new menu item.
-     *
-     * @param rb     resource bundle
-     * @param key    menu item text key
-     * @param action menu item action
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, String, EventHandler)}
      */
-    public static MenuItem newMenuItem(ResourceBundle rb,
-                                       String key,
-                                       EventHandler<ActionEvent> action)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb, String key, String suffix, EventHandler<ActionEvent> action) {
+        return MenuFactory.newMenuItem(rb, key, suffix, action);
+    }
+
+    /**
+     * @deprecated use {@link MenuFactory#newMenuItem(String, EventHandler)}
+     */
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(String text, EventHandler<ActionEvent> action) {
+        return MenuFactory.newMenuItem(text, action);
+    }
+
+    /**
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, KeyCombination, EventHandler)}
+     */
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb, String key, KeyCombination keyCombination,
+                                EventHandler<ActionEvent> action)
     {
-        var menuItem = new MenuItem(rb.getString(key));
-        menuItem.setOnAction(action);
-        return menuItem;
+        return MenuFactory.newMenuItem(rb, key, keyCombination, action);
     }
 
     /**
-     * Creates new menu item.
-     *
-     * @param text   menu item text
-     * @param action menu item action
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, String, KeyCombination, EventHandler)}
      */
-    public static MenuItem newMenuItem(String text,
-                                       EventHandler<ActionEvent> action)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb,
+                                String key,
+                                String suffix,
+                                KeyCombination keyCombination,
+                                EventHandler<ActionEvent> action)
     {
-        var menuItem = new MenuItem(text);
-        menuItem.setOnAction(action);
-        return menuItem;
+        return MenuFactory.newMenuItem(rb, key, suffix, keyCombination, action);
     }
 
     /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param keyCombination menu item accelerator
-     * @param action         menu item action
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, EventHandler, BooleanBinding)}
      */
-    public static MenuItem newMenuItem(ResourceBundle rb,
-                                       String key,
-                                       KeyCombination keyCombination,
-                                       EventHandler<ActionEvent> action)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb, String key, EventHandler<ActionEvent> action,
+                                BooleanBinding disableBinding)
     {
-        var menuItem = new MenuItem(rb.getString(key));
-        menuItem.setAccelerator(keyCombination);
-        menuItem.setOnAction(action);
-        return menuItem;
+        return MenuFactory.newMenuItem(rb, key, action, disableBinding);
     }
 
     /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param action         menu item action
-     * @param disableBinding boolean binding to disable menu item
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, String, EventHandler, BooleanBinding)}
      */
-    public static MenuItem newMenuItem(ResourceBundle rb,
-                                       String key,
-                                       EventHandler<ActionEvent> action,
-                                       BooleanBinding disableBinding)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb,
+                                String key,
+                                String suffix,
+                                EventHandler<ActionEvent> action,
+                                BooleanBinding disableBinding)
     {
-        var menuItem = newMenuItem(rb, key, action);
-        menuItem.disableProperty().bind(disableBinding);
-        return menuItem;
+        return MenuFactory.newMenuItem(rb, key, suffix, action, disableBinding);
     }
 
     /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param keyCombination menu item accelerator
-     * @param action         menu item action
-     * @param disableBinding boolean binding to disable menu item
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newMenuItem(ResourceBundle, String, KeyCombination, EventHandler, BooleanBinding)}
      */
-    public static MenuItem newMenuItem(ResourceBundle rb,
-                                       String key,
-                                       KeyCombination keyCombination,
-                                       EventHandler<ActionEvent> action,
-                                       BooleanBinding disableBinding)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuItem newMenuItem(ResourceBundle rb,
+                                String key,
+                                KeyCombination keyCombination,
+                                EventHandler<ActionEvent> action,
+                                BooleanBinding disableBinding)
     {
-        var menuItem = newMenuItem(rb, key, keyCombination, action);
-        menuItem.disableProperty().bind(disableBinding);
-        return menuItem;
+        return MenuFactory.newMenuItem(rb, key, keyCombination, action, disableBinding);
     }
 
     /**
-     * Creates new check menu item.
-     *
-     * @param rb       resource bundle
-     * @param key      menu item text key
-     * @param selected initial selected state
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newCheckMenuItem(ResourceBundle, String, boolean)}
      */
-    public static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                                 String key,
-                                                 boolean selected)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static CheckMenuItem newCheckMenuItem(ResourceBundle rb, String key, boolean selected) {
+        return MenuFactory.newCheckMenuItem(rb, key, selected);
+    }
+
+    /**
+     * @deprecated use {@link MenuFactory#newCheckMenuItem(ResourceBundle, String, boolean, EventHandler)}
+     */
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
+                                          String key,
+                                          boolean selected,
+                                          EventHandler<ActionEvent> action)
     {
-        var menuItem = new CheckMenuItem(rb.getString(key));
-        menuItem.setSelected(selected);
-        return menuItem;
+        return MenuFactory.newCheckMenuItem(rb, key, selected, action);
     }
 
     /**
-     * Creates new check menu item.
-     *
-     * @param rb       resource bundle
-     * @param key      menu item text key
-     * @param selected initial selected state
-     * @param action   menu item action
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newCheckMenuItem(ResourceBundle, String, boolean, KeyCombination)}
      */
-    public static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                                 String key,
-                                                 boolean selected,
-                                                 EventHandler<ActionEvent> action)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
+                                          String key,
+                                          boolean selected,
+                                          KeyCombination keyCombination)
     {
-        var menuItem = newCheckMenuItem(rb, key, selected);
-        menuItem.setOnAction(action);
-        return menuItem;
+        return MenuFactory.newCheckMenuItem(rb, key, selected, keyCombination);
     }
 
     /**
-     * Creates new check menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param selected       initial selected state
-     * @param keyCombination menu item accelerator
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newCheckMenuItem(ResourceBundle, String, boolean, KeyCombination, EventHandler)}
      */
-    public static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                                 String key,
-                                                 boolean selected,
-                                                 KeyCombination keyCombination)
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
+                                          String key,
+                                          boolean selected,
+                                          KeyCombination keyCombination,
+                                          EventHandler<ActionEvent> action)
     {
-        var menuItem = newCheckMenuItem(rb, key, selected);
-        menuItem.setAccelerator(keyCombination);
-        return menuItem;
+        return MenuFactory.newCheckMenuItem(rb, key, selected, keyCombination, action);
     }
 
     /**
-     * Creates new check menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param selected       initial selected state
-     * @param keyCombination menu item accelerator
-     * @param action         menu item action
-     * @return menu item
+     * @deprecated use {@link MenuFactory#newMenu(ResourceBundle, String, MenuItem...)}
      */
-    public static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                                 String key,
-                                                 boolean selected,
-                                                 KeyCombination keyCombination,
-                                                 EventHandler<ActionEvent> action)
-    {
-        var menuItem = newCheckMenuItem(rb, key, selected);
-        menuItem.setAccelerator(keyCombination);
-        menuItem.setOnAction(action);
-        return menuItem;
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static Menu newMenu(ResourceBundle rb, String key, MenuItem... items) {
+        return MenuFactory.newMenu(rb, key, items);
     }
 
     /**
-     * Creates new menu.
-     *
-     * @param rb    resource bundle
-     * @param key   menu text key
-     * @param items menu items
-     * @return menu
+     * @deprecated use {@link MenuFactory#newMenu(ResourceBundle, String, Node, MenuItem...)}
      */
-    public static Menu newMenu(ResourceBundle rb,
-                               String key,
-                               MenuItem... items)
-    {
-        return newMenu(rb, key, null, items);
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static Menu newMenu(ResourceBundle rb, String key, Node node, MenuItem... items) {
+        return MenuFactory.newMenu(rb, key, node, items);
     }
 
     /**
-     * Creates new menu.
-     *
-     * @param rb    resource bundle
-     * @param key   menu text key
-     * @param node  menu image node
-     * @param items menu items
-     * @return menu
+     * @deprecated use {@link MenuFactory#newMenuBar(Menu...)}
      */
-    public static Menu newMenu(ResourceBundle rb,
-                               String key,
-                               Node node,
-                               MenuItem... items)
-    {
-        return new Menu(rb.getString(key), node, items);
-    }
-
-    /**
-     * Creates new menu bar. useSystemMenuBar property is set to <code>true</code>.
-     *
-     * @param menus menus
-     * @return menu bar
-     */
-    public static MenuBar newMenuBar(Menu... menus) {
-        var menuBar = new MenuBar(menus);
-        menuBar.setUseSystemMenuBar(true);
-        return menuBar;
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static MenuBar newMenuBar(Menu... menus) {
+        return MenuFactory.newMenuBar(menus);
     }
 
     /**
@@ -278,7 +213,7 @@ public final class FxFactory {
      * @param valueCallback value callback
      * @return text field
      */
-    public static TextField newSearchField(Consumer<String> valueCallback) {
+    static TextField newSearchField(Consumer<String> valueCallback) {
         return newSearchField(null, valueCallback);
     }
 
@@ -289,9 +224,7 @@ public final class FxFactory {
      * @param valueCallback value callback
      * @return text field
      */
-    public static TextField newSearchField(Image leftImage,
-                                           Consumer<String> valueCallback)
-    {
+    static TextField newSearchField(Image leftImage, Consumer<String> valueCallback) {
         var searchField = TextFields.createClearableTextField();
         searchField.setPrefColumnCount(20);
         if (leftImage != null) {
@@ -307,93 +240,50 @@ public final class FxFactory {
     }
 
     /**
-     * Creates new push button.
-     *
-     * @param text   button text
-     * @param action button action
-     * @return button
+     * @deprecated use {@link ButtonFactory#newButton(String, EventHandler)}
      */
-    public static Button newButton(String text,
-                                   EventHandler<ActionEvent> action)
-    {
-        var button = new Button(text);
-        button.setOnAction(action);
-        return button;
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static Button newButton(String text, EventHandler<ActionEvent> action) {
+        return ButtonFactory.newButton(text, action);
     }
 
     /**
-     * Creates new push button.
-     *
-     * @param rb     resource bundle
-     * @param key    button text key
-     * @param action button action
-     * @return button
+     * @deprecated use {@link ButtonFactory#newButton(ResourceBundle, String, EventHandler)}
      */
-    public static Button newButton(ResourceBundle rb,
-                                   String key,
-                                   EventHandler<ActionEvent> action)
-    {
-        var button = new Button(rb.getString(key));
-        button.setOnAction(action);
-        return button;
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static Button newButton(ResourceBundle rb, String key, EventHandler<ActionEvent> action) {
+        return ButtonFactory.newButton(rb, key, action);
     }
 
     /**
-     * Creates new radio button.
-     *
-     * @param rb    resource bundle
-     * @param key   button text key
-     * @param group toggle group
-     * @return button
+     * @deprecated use {@link ButtonFactory#newRadioButton(ResourceBundle, String, ToggleGroup)}
      */
-    public static RadioButton newRadioButton(ResourceBundle rb,
-                                             String key,
-                                             ToggleGroup group)
-    {
-        var button = new RadioButton(rb.getString(key));
-        button.setToggleGroup(group);
-        return button;
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static RadioButton newRadioButton(ResourceBundle rb, String key, ToggleGroup group) {
+        return ButtonFactory.newRadioButton(rb, key, group);
     }
 
     /**
-     * Creates new radio button.
-     *
-     * @param rb       resource bundle
-     * @param key      button text key
-     * @param group    toggle group
-     * @param selected initial selected state
-     * @return button
+     * @deprecated use {@link ButtonFactory#newRadioButton(ResourceBundle, String, ToggleGroup, boolean)}
      */
-    public static RadioButton newRadioButton(ResourceBundle rb,
-                                             String key,
-                                             ToggleGroup group,
-                                             boolean selected)
-    {
-        var button = newRadioButton(rb, key, group);
-        button.setSelected(selected);
-        return button;
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static RadioButton newRadioButton(ResourceBundle rb, String key, ToggleGroup group, boolean selected) {
+        return ButtonFactory.newRadioButton(rb, key, group, selected);
     }
 
     /**
-     * Creates new label.
-     *
-     * @param rb  resource bundle
-     * @param key text key
-     * @return label
+     * @deprecated use {@link LabelFactory#newLabel(ResourceBundle, String)}
      */
-    public static Label newLabel(ResourceBundle rb, String key) {
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static Label newLabel(ResourceBundle rb, String key) {
         return new Label(rb.getString(key));
     }
 
     /**
-     * Creates new label.
-     *
-     * @param rb   resource bundle
-     * @param key  text key
-     * @param node node for the label
-     * @return label
+     * @deprecated use {@link LabelFactory#newLabel(ResourceBundle, String, Node)}
      */
-    public static Label newLabel(ResourceBundle rb, String key, Node node) {
+    @Deprecated(since = "1.1.0", forRemoval = true)
+    static Label newLabel(ResourceBundle rb, String key, Node node) {
         return new Label(rb.getString(key), node);
     }
 
@@ -404,7 +294,7 @@ public final class FxFactory {
      * @param key text key
      * @return check box
      */
-    public static CheckBox newCheckBox(ResourceBundle rb, String key) {
+    static CheckBox newCheckBox(ResourceBundle rb, String key) {
         return new CheckBox(rb.getString(key));
     }
 
@@ -416,7 +306,7 @@ public final class FxFactory {
      * @param closeable closeable flag
      * @return tab
      */
-    public static Tab newTab(ResourceBundle rb, String key, boolean closeable) {
+    static Tab newTab(ResourceBundle rb, String key, boolean closeable) {
         var tab = new Tab(rb.getString(key));
         tab.setClosable(closeable);
         return tab;
@@ -431,7 +321,7 @@ public final class FxFactory {
      * @param node      tab content
      * @return tab
      */
-    public static Tab newTab(ResourceBundle rb, String key, boolean closeable, Node node) {
+    static Tab newTab(ResourceBundle rb, String key, boolean closeable, Node node) {
         var tab = new Tab(rb.getString(key), node);
         tab.setClosable(closeable);
         return tab;

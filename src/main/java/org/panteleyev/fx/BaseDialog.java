@@ -30,6 +30,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import org.controlsfx.validation.ValidationSupport;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -99,5 +100,16 @@ public class BaseDialog<R> extends Dialog<R> {
 
         Button btCancel = (Button) getDialogPane().lookupButton(ButtonType.CANCEL);
         btCancel.setText(rb == null ? "Cancel" : rb.getString("button.Cancel"));
+    }
+
+    /**
+     * Returns button of the specified type.
+     *
+     * @param type button type
+     * @return button if exists
+     */
+    protected Optional<Button> getButton(ButtonType type) {
+        var node = getDialogPane().lookupButton(type);
+        return node == null ? Optional.empty() : Optional.of((Button) node);
     }
 }

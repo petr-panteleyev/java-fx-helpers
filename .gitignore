@@ -1,10 +1,23 @@
-build
+# OS X
 .DS_Store
-/repo/
-*~
-**/private
 
-**/target/
+# Maven
+target/
 
+# IDEA
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/libraries
+.idea/artifacts
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
 *.iml
-.idea
+*.ipr
+out/

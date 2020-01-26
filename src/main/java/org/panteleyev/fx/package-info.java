@@ -24,15 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * Helper classes for JavaFX.
+ */
 package org.panteleyev.fx;
-
-import javafx.embed.swing.JFXPanel;
-import org.testng.annotations.BeforeClass;
-
-public class TestFxFactory {
-    @BeforeClass
-    public static void setup() {
-        new JFXPanel();
-    }
-
-}

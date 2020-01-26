@@ -26,13 +26,14 @@
 
 package org.panteleyev.fx;
 
-import javafx.embed.swing.JFXPanel;
-import org.testng.annotations.BeforeClass;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import java.util.ResourceBundle;
 
-public class TestFxFactory {
-    @BeforeClass
-    public static void setup() {
-        new JFXPanel();
-    }
+interface Constants {
+    ResourceBundle RB = ResourceBundle.getBundle("test");
 
+    String TEST_LABEL = "test.label";
+    String TEST_STRING = "Test string";
+    EventHandler<ActionEvent> ACTION = x -> {};
 }
