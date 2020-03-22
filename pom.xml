@@ -1,3 +1,8 @@
+<!--
+  Copyright (c) Petr Panteleyev. All rights reserved.
+  Licensed under the BSD license. See LICENSE file in the project root for full license information.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -6,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>JavaFX helper classes</description>
@@ -34,10 +39,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>13</maven.compiler.source>
-        <maven.compiler.target>13</maven.compiler.target>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
         <!-- dependencies -->
-        <javaFxVersion>13.0.1</javaFxVersion>
+        <javaFxVersion>14</javaFxVersion>
         <testNgVersion>6.14.3</testNgVersion>
         <controlsFxVersion>11.0.1</controlsFxVersion>
         <mockitoVersion>3.2.4</mockitoVersion>
@@ -102,7 +107,7 @@
                 <configuration>
                     <toolchains>
                         <jdk>
-                            <version>13</version>
+                            <version>14</version>
                         </jdk>
                     </toolchains>
                 </configuration>
