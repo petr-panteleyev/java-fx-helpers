@@ -104,6 +104,29 @@ public interface MenuFactory {
      *
      * @param rb             resource bundle
      * @param key            menu item text key
+     * @param suffix         menu item text suffix
+     * @param keyCombination menu item accelerator
+     * @param action         menu item action
+     * @param disableBinding boolean binding to disable menu item
+     * @return menu item
+     */
+    static MenuItem newMenuItem(ResourceBundle rb,
+                                String key,
+                                String suffix,
+                                KeyCombination keyCombination,
+                                EventHandler<ActionEvent> action,
+                                BooleanBinding disableBinding)
+    {
+        var menuItem = newMenuItem(rb, key, suffix, keyCombination, action);
+        menuItem.disableProperty().bind(disableBinding);
+        return menuItem;
+    }
+
+    /**
+     * Creates new menu item.
+     *
+     * @param rb             resource bundle
+     * @param key            menu item text key
      * @param action         menu item action
      * @param disableBinding boolean binding to disable menu item
      * @return menu item

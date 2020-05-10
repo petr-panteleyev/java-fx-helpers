@@ -13,7 +13,7 @@ This library provides JavaFX helper classes.
 <artifact>
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 </artifact>
 ```
 
@@ -21,5 +21,5 @@ This library provides JavaFX helper classes.
 
 | Version | JDK |
 |---|---|
-|1.2.0|14|
+|1.2.0, 1.2.1|14|
 |1.0.0, 1.1.0|13|
