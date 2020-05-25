@@ -1,9 +1,8 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -74,7 +73,7 @@ public class Controller {
      * @param root root node
      */
     protected final void setupWindow(Parent root) {
-        Scene scene = new Scene(root);
+        var scene = new Scene(root);
         scene.setUserData(this);
 
         if (stage == null) {

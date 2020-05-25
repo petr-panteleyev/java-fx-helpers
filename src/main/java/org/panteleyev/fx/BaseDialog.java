@@ -1,14 +1,13 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import org.controlsfx.validation.ValidationSupport;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -19,8 +18,6 @@ import java.util.ResourceBundle;
  * @param <R> The return type of the dialog, via the result property.
  */
 public class BaseDialog<R> extends Dialog<R> {
-    protected final ValidationSupport validation = new ValidationSupport();
-
     private static final URL CSS = BaseDialog.class.getResource("/org/panteleyev/fx/fx.css");
 
     /**
@@ -71,14 +68,27 @@ public class BaseDialog<R> extends Dialog<R> {
      * @param rb resource bundle
      */
     protected void createDefaultButtons(ResourceBundle rb) {
+        createDefaultButtons(rb, null);
+    }
+
+    /**
+     * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel"
+     * resource for Cancel translation.
+     *
+     * @param rb                        resource bundle
+     * @param validationInvalidProperty invalid property for validation support
+     */
+    protected void createDefaultButtons(ResourceBundle rb, ReadOnlyBooleanProperty validationInvalidProperty) {
         getDialogPane().getButtonTypes().addAll(
             ButtonType.OK,
             ButtonType.CANCEL);
 
-        Button btOk = (Button) getDialogPane().lookupButton(ButtonType.OK);
-        btOk.disableProperty().bind(validation.invalidProperty());
+        if (validationInvalidProperty != null) {
+            var btOk = (Button) getDialogPane().lookupButton(ButtonType.OK);
+            btOk.disableProperty().bind(validationInvalidProperty);
+        }
 
-        Button btCancel = (Button) getDialogPane().lookupButton(ButtonType.CANCEL);
+        var btCancel = (Button) getDialogPane().lookupButton(ButtonType.CANCEL);
         btCancel.setText(rb == null ? "Cancel" : rb.getString("button.Cancel"));
     }
 

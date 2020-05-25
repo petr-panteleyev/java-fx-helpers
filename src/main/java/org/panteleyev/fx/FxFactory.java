@@ -1,21 +1,17 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import org.controlsfx.control.textfield.CustomTextField;
-import org.controlsfx.control.textfield.TextFields;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * This interface provides convenience methods to create and configure various JavaFX controls in one method call.
@@ -25,26 +21,13 @@ public interface FxFactory {
     /**
      * Creates new search text field.
      *
+     * @param fieldSupplier text field supplier
      * @param valueCallback value callback
      * @return text field
      */
-    static TextField newSearchField(Consumer<String> valueCallback) {
-        return newSearchField(null, valueCallback);
-    }
-
-    /**
-     * Creates new search text field.
-     *
-     * @param leftImage     image to put on the left side of the text field
-     * @param valueCallback value callback
-     * @return text field
-     */
-    static TextField newSearchField(Image leftImage, Consumer<String> valueCallback) {
-        var searchField = TextFields.createClearableTextField();
+    static TextField newSearchField(Supplier<TextField> fieldSupplier, Consumer<String> valueCallback) {
+        var searchField = fieldSupplier.get();
         searchField.setPrefColumnCount(20);
-        if (leftImage != null) {
-            ((CustomTextField) searchField).setLeft(new ImageView(leftImage));
-        }
         searchField.textProperty().addListener((x, y, newValue) -> valueCallback.accept(newValue));
         searchField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ESCAPE) {

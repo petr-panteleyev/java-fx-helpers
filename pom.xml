@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.2.1</version>
+    <version>1.3.0</version>
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>JavaFX helper classes</description>
@@ -42,9 +42,8 @@
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <!-- dependencies -->
-        <javaFxVersion>14</javaFxVersion>
+        <javaFxVersion>14.0.1</javaFxVersion>
         <testNgVersion>6.14.3</testNgVersion>
-        <controlsFxVersion>11.0.1</controlsFxVersion>
         <mockitoVersion>3.2.4</mockitoVersion>
         <powerMockVersion>2.0.4</powerMockVersion>
         <!-- plugins -->
@@ -72,11 +71,6 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javaFxVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>${controlsFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -116,6 +110,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${mavenCompilerPluginVersion}</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -125,7 +124,7 @@
                     <notimestamp>true</notimestamp>
                     <author>false</author>
                     <bottom><![CDATA[Copyright &copy; 2018, 2020, Petr Panteleyev]]></bottom>
-                    <additionalOptions>-html5</additionalOptions>
+                    <additionalOptions>-html5 --enable-preview --source ${maven.compiler.source}</additionalOptions>
                     <show>protected</show>
                 </configuration>
                 <executions>
@@ -145,6 +144,7 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <argLine>--enable-preview</argLine>
                 </configuration>
             </plugin>
             <plugin>
