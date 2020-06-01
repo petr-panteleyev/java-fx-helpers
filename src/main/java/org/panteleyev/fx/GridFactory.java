@@ -7,6 +7,7 @@ package org.panteleyev.fx;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import org.panteleyev.fx.impl.ColumnSpan;
+import java.util.Collection;
 import java.util.List;
 
 public interface GridFactory {
@@ -17,16 +18,36 @@ public interface GridFactory {
     };
 
     /**
-     * Creates new GridPane
+     * Creates new GridPane with styles and rows. See {@link #addRows(GridPane, List[])}.
      *
-     * @param styles CSS styles
+     * @param styles GridPane styles
+     * @param rows   rows
      * @return GridPane instance
      */
-    static GridPane newGridPane(String... styles) {
+    @SafeVarargs
+    static GridPane newGridPane(Collection<String> styles, List<Node>... rows) {
         var gridPane = new GridPane();
         for (var style : styles) {
             gridPane.getStyleClass().add(style);
         }
+
+        addRows(gridPane, rows);
+        return gridPane;
+    }
+
+    /**
+     * Creates new GridPane with a single style and rows. See {@link #addRows(GridPane, List[])}.
+     *
+     * @param style GridPane style
+     * @param rows  rows
+     * @return GridPane instance
+     */
+    @SafeVarargs
+    static GridPane newGridPane(String style, List<Node>... rows) {
+        var gridPane = new GridPane();
+        gridPane.getStyleClass().add(style);
+
+        addRows(gridPane, rows);
         return gridPane;
     }
 
@@ -62,6 +83,8 @@ public interface GridFactory {
      * calculated automatically. To skip column a special node {@link #EMPTY_NODE} should be used. To set column span
      * for a node use {@link #colSpan(Node, int)} method.
      *
+     * Empty list is ignored and row index is not increased. This can be used for conditional rows.
+     *
      * @param pane GridPane instance
      * @param rows list of rows
      */
@@ -70,6 +93,10 @@ public interface GridFactory {
         int rowIndex = 0;
 
         for (var row : rows) {
+            if (row.isEmpty()) {
+                continue;
+            }
+
             int columnIndex = 0;
 
             for (var node : row) {
