@@ -1,9 +1,8 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -32,7 +31,7 @@ public interface TreeTableFactory {
      * @param <T>              the type of the item contained within the Cell.
      * @return table column
      */
-    static <S, T> TreeTableColumn<S, T> newTreeTableColumn(
+    static <S, T> TreeTableColumn<S, T> treeTableColumn(
         String text,
         Callback<TreeTableColumn<S, T>, TreeTableCell<S, T>> cellFactory,
         Callback<S, T> propertyCallback,
@@ -65,12 +64,12 @@ public interface TreeTableFactory {
      * @param <S>          the type of the TreeTableView generic type
      * @return table column
      */
-    static <S> TreeTableColumn<S, S> newTreeTableColumn(
+    static <S> TreeTableColumn<S, S> treeTableColumn(
         String text,
         Callback<TreeTableColumn<S, S>, TreeTableCell<S, S>> cellFactory,
         ObservableValue<? extends Number> widthBinding)
     {
-        var column = newTreeTableColumn(text, cellFactory, p -> p, widthBinding);
+        var column = treeTableColumn(text, cellFactory, p -> p, widthBinding);
         column.setSortable(true);
         return column;
     }
@@ -82,7 +81,7 @@ public interface TreeTableFactory {
      * @param <T>      value type
      * @return tree item
      */
-    static <T> TreeItem<T> newTreeItem(boolean expanded) {
+    static <T> TreeItem<T> treeItem(boolean expanded) {
         var item = new TreeItem<T>();
         item.setExpanded(expanded);
         return item;
@@ -96,7 +95,7 @@ public interface TreeTableFactory {
      * @param <T>      value type
      * @return tree item
      */
-    static <T> TreeItem<T> newTreeItem(T value, boolean expanded) {
+    static <T> TreeItem<T> treeItem(T value, boolean expanded) {
         var item = new TreeItem<T>(value);
         item.setExpanded(expanded);
         return item;
@@ -111,7 +110,7 @@ public interface TreeTableFactory {
      * @param <T>      value type
      * @return tree item
      */
-    static <T> TreeItem<T> newTreeItem(T value, Node graphic, boolean expanded) {
+    static <T> TreeItem<T> treeItem(T value, Node graphic, boolean expanded) {
         var item = new TreeItem<T>(value, graphic);
         item.setExpanded(expanded);
         return item;

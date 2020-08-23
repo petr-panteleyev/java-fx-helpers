@@ -4,25 +4,60 @@
  */
 package org.panteleyev.fx;
 
-import javafx.scene.control.ComboBox;
-import org.panteleyev.fx.combobox.ComboBoxImpl;
+import javafx.scene.Node;
+import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
+/**
+ * This interface provides common utility methods.
+ */
 public interface FxUtils {
-    /**
-     * Clears selection and sets list value to <code>null</code>. For {@link ComboBox} instances created
-     * with methods from this interface default value is rendered in the button cell, see
-     * {@link ComboBox#getButtonCell()}.
-     *
-     * @param comboBoxes {@link ComboBox} instances
-     */
-    static void clearValueAndSelection(ComboBox<?>... comboBoxes) {
-        for (var cb : comboBoxes) {
-            cb.setValue(null);
-            cb.getSelectionModel().select(null);
 
-            if (cb instanceof ComboBoxImpl<?> comboBox) {
-                comboBox.renderDefaultValue();
-            }
-        }
+    /**
+     * Convenience method to setup JavaFX node.
+     *
+     * @param node  node
+     * @param setup setup consumer
+     * @param <T>   type of the node
+     * @return node
+     */
+    static <T extends Node> T fxNode(T node, Consumer<T> setup) {
+        setup.accept(node);
+        return node;
+    }
+
+    /**
+     * Creates a new string using resource bundle and key.
+     *
+     * @param bundle resource bundle
+     * @param key    key in resource bundle
+     * @return string
+     */
+    static String fxString(ResourceBundle bundle, String key) {
+        return bundle.getString(key);
+    }
+
+    /**
+     * Creates a new string using resource bundle and key. Suffix is appended to the string retrieved from the
+     * resource bundle.
+     *
+     * @param bundle resource bundle
+     * @param key    key in resource bundle
+     * @param suffix suffix that is appended to the string
+     * @return string
+     */
+    static String fxString(ResourceBundle bundle, String key, String suffix) {
+        return bundle.getString(key) + suffix;
+    }
+
+    /**
+     * Creates a new string by appending suffix to the given string.
+     *
+     * @param str    string
+     * @param suffix suffix that is appended to the string
+     * @return string
+     */
+    static String fxString(String str, String suffix) {
+        return str + suffix;
     }
 }

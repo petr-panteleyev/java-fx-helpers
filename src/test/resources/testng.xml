@@ -16,6 +16,7 @@
             <class name="org.panteleyev.fx.TestMenuFactory"/>
             <class name="org.panteleyev.fx.TestButtonFactory"/>
             <class name="org.panteleyev.fx.TestPredicateProperty"/>
+            <class name="org.panteleyev.fx.TestGridBuilder"/>
         </classes>
     </test>
 </suite>

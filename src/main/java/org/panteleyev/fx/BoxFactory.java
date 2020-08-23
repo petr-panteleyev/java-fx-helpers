@@ -4,49 +4,68 @@
  */
 package org.panteleyev.fx;
 
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import java.util.List;
+import java.util.function.Consumer;
 
+/**
+ * This interface provides methods to create instances of {@link HBox} and {@link VBox}.
+ */
 public interface BoxFactory {
-    /**
-     * Creates new HBox.
-     *
-     * @param alignment the overall alignment of children within the hbox's width and height
-     * @param children  the initial set of children for this pane
-     * @return HBox instance
-     */
-    static HBox newHBox(Pos alignment, Node... children) {
-        var hBox = new HBox(children);
-        hBox.setAlignment(alignment);
-        return hBox;
+    static Consumer<Node> hBoxHGrow(Priority priority) {
+        return node -> HBox.setHgrow(node, priority);
     }
 
     /**
-     * Creates new HBox.
+     * Creates new {@link HBox}.
      *
-     * @param spacing   the amount of horizontal space between each child
-     * @param alignment the overall alignment of children within the hbox's width and height
-     * @param children  the initial set of children for this pane
+     * @param spacing the amount of horizontal space between each node
+     * @param nodes   the initial set of child nodes for this pane
      * @return HBox instance
      */
-    static HBox newHBox(double spacing, Pos alignment, Node... children) {
-        var hBox = new HBox(spacing, children);
-        hBox.setAlignment(alignment);
-        return hBox;
+    static HBox hBox(double spacing, Node... nodes) {
+        return new HBox(spacing, nodes);
     }
 
+    /**
+     * Creates new {@link VBox}.
+     *
+     * @param nodes the initial set of child nodes for this pane
+     * @param setup setup function
+     * @return HBox instance
+     */
+    static HBox hBox(List<Node> nodes, Consumer<HBox> setup) {
+        var box = new HBox();
+        nodes.forEach(n -> box.getChildren().add(n));
+        setup.accept(box);
+        return box;
+    }
 
     /**
-     * Sets the horizontal grow priority for the specified children.
+     * Creates new {@link VBox}.
      *
-     * @param priority horizontal grow priority
-     * @param children children
+     * @param spacing the amount of vertical space between each child node
+     * @param nodes   the initial set of children for this pane
+     * @return VBox instance
      */
-    static void setHGrow(Priority priority, Node... children) {
-        for (var node : children) {
-            HBox.setHgrow(node, priority);
-        }
+    static VBox vBox(double spacing, Node... nodes) {
+        return new VBox(spacing, nodes);
+    }
+
+    /**
+     * Creates new {@link VBox}.
+     *
+     * @param nodes the initial set of child nodes for this pane
+     * @param setup setup function
+     * @return HBox instance
+     */
+    static VBox vBox(List<Node> nodes, Consumer<VBox> setup) {
+        var box = new VBox();
+        nodes.forEach(n -> box.getChildren().add(n));
+        setup.accept(box);
+        return box;
     }
 }

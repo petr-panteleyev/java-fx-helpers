@@ -9,4 +9,6 @@ module org.panteleyev.fx {
     requires javafx.swing;
 
     exports org.panteleyev.fx;
+    exports org.panteleyev.fx.combobox;
+    exports org.panteleyev.fx.grid;
 }

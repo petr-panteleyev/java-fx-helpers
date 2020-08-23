@@ -1,9 +1,8 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
-import java.util.ResourceBundle;
 
 /**
  * This interface provides convenience methods to create menus, menu items, etc.
@@ -28,7 +26,7 @@ public interface MenuFactory {
      * @param action menu item action
      * @return menu item
      */
-    static MenuItem newMenuItem(String text, EventHandler<ActionEvent> action) {
+    static MenuItem menuItem(String text, EventHandler<ActionEvent> action) {
         var menuItem = new MenuItem(text);
         menuItem.setOnAction(action);
         return menuItem;
@@ -37,43 +35,13 @@ public interface MenuFactory {
     /**
      * Creates new menu item.
      *
-     * @param rb     resource bundle
-     * @param key    menu item text key
-     * @param action menu item action
-     * @return menu item
-     */
-    static MenuItem newMenuItem(ResourceBundle rb, String key, EventHandler<ActionEvent> action) {
-        return newMenuItem(rb.getString(key), action);
-    }
-
-    /**
-     * Creates new menu item.
-     *
-     * @param rb     resource bundle
-     * @param key    menu item text key
-     * @param suffix menu item text suffix
-     * @param action menu item action
-     * @return menu item
-     */
-    static MenuItem newMenuItem(ResourceBundle rb, String key, String suffix, EventHandler<ActionEvent> action) {
-        return newMenuItem(rb.getString(key) + suffix, action);
-    }
-
-    /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
+     * @param text           menu item text
      * @param keyCombination menu item accelerator
      * @param action         menu item action
      * @return menu item
      */
-    static MenuItem newMenuItem(ResourceBundle rb,
-                                String key,
-                                KeyCombination keyCombination,
-                                EventHandler<ActionEvent> action)
-    {
-        var menuItem = newMenuItem(rb.getString(key), action);
+    static MenuItem menuItem(String text, KeyCombination keyCombination, EventHandler<ActionEvent> action) {
+        var menuItem = menuItem(text, action);
         menuItem.setAccelerator(keyCombination);
         return menuItem;
     }
@@ -81,43 +49,13 @@ public interface MenuFactory {
     /**
      * Creates new menu item.
      *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param suffix         menu item text suffix
-     * @param keyCombination menu item accelerator
-     * @param action         menu item action
-     * @return menu item
-     */
-    static MenuItem newMenuItem(ResourceBundle rb,
-                                String key,
-                                String suffix,
-                                KeyCombination keyCombination,
-                                EventHandler<ActionEvent> action)
-    {
-        var menuItem = newMenuItem(rb, key, suffix, action);
-        menuItem.setAccelerator(keyCombination);
-        return menuItem;
-    }
-
-    /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param suffix         menu item text suffix
-     * @param keyCombination menu item accelerator
+     * @param text           menu item text
      * @param action         menu item action
      * @param disableBinding boolean binding to disable menu item
      * @return menu item
      */
-    static MenuItem newMenuItem(ResourceBundle rb,
-                                String key,
-                                String suffix,
-                                KeyCombination keyCombination,
-                                EventHandler<ActionEvent> action,
-                                BooleanBinding disableBinding)
-    {
-        var menuItem = newMenuItem(rb, key, suffix, keyCombination, action);
+    static MenuItem menuItem(String text, EventHandler<ActionEvent> action, BooleanBinding disableBinding) {
+        var menuItem = menuItem(text, action);
         menuItem.disableProperty().bind(disableBinding);
         return menuItem;
     }
@@ -125,60 +63,18 @@ public interface MenuFactory {
     /**
      * Creates new menu item.
      *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param action         menu item action
-     * @param disableBinding boolean binding to disable menu item
-     * @return menu item
-     */
-    static MenuItem newMenuItem(ResourceBundle rb,
-                                String key,
-                                EventHandler<ActionEvent> action,
-                                BooleanBinding disableBinding)
-    {
-        var menuItem = newMenuItem(rb, key, action);
-        menuItem.disableProperty().bind(disableBinding);
-        return menuItem;
-    }
-
-    /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
-     * @param suffix         menu item text suffix
-     * @param action         menu item action
-     * @param disableBinding boolean binding to disable menu item
-     * @return menu item
-     */
-    static MenuItem newMenuItem(ResourceBundle rb,
-                                String key,
-                                String suffix,
-                                EventHandler<ActionEvent> action,
-                                BooleanBinding disableBinding)
-    {
-        var menuItem = newMenuItem(rb, key, suffix, action);
-        menuItem.disableProperty().bind(disableBinding);
-        return menuItem;
-    }
-
-    /**
-     * Creates new menu item.
-     *
-     * @param rb             resource bundle
-     * @param key            menu item text key
+     * @param text           menu item text
      * @param keyCombination menu item accelerator
      * @param action         menu item action
      * @param disableBinding boolean binding to disable menu item
      * @return menu item
      */
-    static MenuItem newMenuItem(ResourceBundle rb,
-                                String key,
-                                KeyCombination keyCombination,
-                                EventHandler<ActionEvent> action,
-                                BooleanBinding disableBinding)
+    static MenuItem menuItem(String text,
+                             KeyCombination keyCombination,
+                             EventHandler<ActionEvent> action,
+                             BooleanBinding disableBinding)
     {
-        var menuItem = newMenuItem(rb, key, keyCombination, action);
+        var menuItem = menuItem(text, keyCombination, action);
         menuItem.disableProperty().bind(disableBinding);
         return menuItem;
     }
@@ -186,13 +82,12 @@ public interface MenuFactory {
     /**
      * Creates new check menu item.
      *
-     * @param rb       resource bundle
-     * @param key      menu item text key
+     * @param text     menu item text
      * @param selected initial selected state
      * @return menu item
      */
-    static CheckMenuItem newCheckMenuItem(ResourceBundle rb, String key, boolean selected) {
-        var menuItem = new CheckMenuItem(rb.getString(key));
+    static CheckMenuItem checkMenuItem(String text, boolean selected) {
+        var menuItem = new CheckMenuItem(text);
         menuItem.setSelected(selected);
         return menuItem;
     }
@@ -200,18 +95,14 @@ public interface MenuFactory {
     /**
      * Creates new check menu item.
      *
-     * @param rb       resource bundle
-     * @param key      menu item text key
+     * @param text     menu item text
      * @param selected initial selected state
      * @param action   menu item action
      * @return menu item
      */
-    static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                          String key,
-                                          boolean selected,
-                                          EventHandler<ActionEvent> action)
-    {
-        var menuItem = newCheckMenuItem(rb, key, selected);
+    static CheckMenuItem checkMenuItem(String text, boolean selected, EventHandler<ActionEvent> action) {
+        var menuItem = new CheckMenuItem(text);
+        menuItem.setSelected(selected);
         menuItem.setOnAction(action);
         return menuItem;
     }
@@ -219,18 +110,14 @@ public interface MenuFactory {
     /**
      * Creates new check menu item.
      *
-     * @param rb             resource bundle
-     * @param key            menu item text key
+     * @param text           menu item text
      * @param selected       initial selected state
      * @param keyCombination menu item accelerator
      * @return menu item
      */
-    static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                          String key,
-                                          boolean selected,
-                                          KeyCombination keyCombination)
-    {
-        var menuItem = newCheckMenuItem(rb, key, selected);
+    static CheckMenuItem checkMenuItem(String text, boolean selected, KeyCombination keyCombination) {
+        var menuItem = new CheckMenuItem(text);
+        menuItem.setSelected(selected);
         menuItem.setAccelerator(keyCombination);
         return menuItem;
     }
@@ -238,20 +125,19 @@ public interface MenuFactory {
     /**
      * Creates new check menu item.
      *
-     * @param rb             resource bundle
-     * @param key            menu item text key
+     * @param text           menu item text
      * @param selected       initial selected state
      * @param keyCombination menu item accelerator
      * @param action         menu item action
      * @return menu item
      */
-    static CheckMenuItem newCheckMenuItem(ResourceBundle rb,
-                                          String key,
-                                          boolean selected,
-                                          KeyCombination keyCombination,
-                                          EventHandler<ActionEvent> action)
+    static CheckMenuItem checkMenuItem(String text,
+                                       boolean selected,
+                                       KeyCombination keyCombination,
+                                       EventHandler<ActionEvent> action)
     {
-        var menuItem = newCheckMenuItem(rb, key, selected);
+        var menuItem = new CheckMenuItem(text);
+        menuItem.setSelected(selected);
         menuItem.setAccelerator(keyCombination);
         menuItem.setOnAction(action);
         return menuItem;
@@ -260,26 +146,24 @@ public interface MenuFactory {
     /**
      * Creates new menu.
      *
-     * @param rb    resource bundle
-     * @param key   menu text key
+     * @param text  menu text
      * @param items menu items
      * @return menu
      */
-    static Menu newMenu(ResourceBundle rb, String key, MenuItem... items) {
-        return newMenu(rb, key, null, items);
+    static Menu newMenu(String text, MenuItem... items) {
+        return new Menu(text, null, items);
     }
 
     /**
      * Creates new menu.
      *
-     * @param rb    resource bundle
-     * @param key   menu text key
+     * @param text  menu text
      * @param node  menu image node
      * @param items menu items
      * @return menu
      */
-    static Menu newMenu(ResourceBundle rb, String key, Node node, MenuItem... items) {
-        return new Menu(rb.getString(key), node, items);
+    static Menu menu(String text, Node node, MenuItem... items) {
+        return new Menu(text, node, items);
     }
 
     /**
@@ -288,7 +172,7 @@ public interface MenuFactory {
      * @param menus menus
      * @return menu bar
      */
-    static MenuBar newMenuBar(Menu... menus) {
+    static MenuBar menuBar(Menu... menus) {
         var menuBar = new MenuBar(menus);
         menuBar.setUseSystemMenuBar(true);
         return menuBar;

@@ -12,7 +12,7 @@ import javafx.scene.control.ComboBox;
  *
  * @param <T> type of the element
  */
-public class ComboBoxImpl<T> extends ComboBox<T> {
+class ComboBoxImpl<T> extends ComboBox<T> {
     private final String defaultString;
 
     public ComboBoxImpl(ObservableList<T> list, String defaultString) {

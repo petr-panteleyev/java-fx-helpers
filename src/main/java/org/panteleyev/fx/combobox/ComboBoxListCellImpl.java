@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class ComboBoxListCellImpl<T> extends ComboBoxListCell<T> {
+class ComboBoxListCellImpl<T> extends ComboBoxListCell<T> {
     private final String defaultValue;
     private final Function<T, String> converter;
     private final Function<T, Image> toImageConverter;
