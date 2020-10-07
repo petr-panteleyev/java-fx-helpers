@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import org.panteleyev.fx.FxUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -53,11 +54,8 @@ import java.util.function.Consumer;
  * </pre>
  */
 public class GridBuilder {
-    /**
-     * Special node that represents empty grid cell.
-     */
-    public static final Node SKIP = new Node() {
-    };
+    @Deprecated(forRemoval = true)
+    public static final Node SKIP = FxUtils.SKIP;
 
     private final List<GridRowBuilder> rows;
     private final Set<String> styles = new HashSet<>();

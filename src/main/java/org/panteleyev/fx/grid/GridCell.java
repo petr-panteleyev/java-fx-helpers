@@ -5,7 +5,6 @@
 package org.panteleyev.fx.grid;
 
 import javafx.scene.Node;
-import static org.panteleyev.fx.grid.GridBuilder.SKIP;
 
 class GridCell extends Node {
     private final Node node;

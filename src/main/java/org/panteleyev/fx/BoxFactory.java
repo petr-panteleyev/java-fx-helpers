@@ -10,9 +10,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import java.util.List;
 import java.util.function.Consumer;
+import static org.panteleyev.fx.FxUtils.SKIP;
 
 /**
  * This interface provides methods to create instances of {@link HBox} and {@link VBox}.
+ * This API respects special node value {@link FxUtils#SKIP}.
  */
 public interface BoxFactory {
     static Consumer<Node> hBoxHGrow(Priority priority) {
@@ -39,7 +41,9 @@ public interface BoxFactory {
      */
     static HBox hBox(List<Node> nodes, Consumer<HBox> setup) {
         var box = new HBox();
-        nodes.forEach(n -> box.getChildren().add(n));
+        nodes.stream()
+            .filter(n -> n != SKIP)
+            .forEach(n -> box.getChildren().add(n));
         setup.accept(box);
         return box;
     }
@@ -64,7 +68,9 @@ public interface BoxFactory {
      */
     static VBox vBox(List<Node> nodes, Consumer<VBox> setup) {
         var box = new VBox();
-        nodes.forEach(n -> box.getChildren().add(n));
+        nodes.stream()
+            .filter(n -> n != SKIP)
+            .forEach(n -> box.getChildren().add(n));
         setup.accept(box);
         return box;
     }

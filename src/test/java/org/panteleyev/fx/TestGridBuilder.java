@@ -5,7 +5,7 @@
 package org.panteleyev.fx;
 
 import org.testng.annotations.Test;
-import static org.panteleyev.fx.grid.GridBuilder.SKIP;
+import static org.panteleyev.fx.FxUtils.SKIP;
 import static org.panteleyev.fx.grid.GridBuilder.gridCell;
 
 public class TestGridBuilder {

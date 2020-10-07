@@ -12,6 +12,11 @@ import java.util.function.Consumer;
  * This interface provides common utility methods.
  */
 public interface FxUtils {
+    /**
+     * Special node that represents empty cell or nothing depending on API.
+     */
+    Node SKIP = new Node() {
+    };
 
     /**
      * Convenience method to setup JavaFX node.
