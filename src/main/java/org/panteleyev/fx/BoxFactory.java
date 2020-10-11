@@ -6,8 +6,11 @@ package org.panteleyev.fx;
 
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import static org.panteleyev.fx.FxUtils.SKIP;
@@ -29,7 +32,9 @@ public interface BoxFactory {
      * @return HBox instance
      */
     static HBox hBox(double spacing, Node... nodes) {
-        return new HBox(spacing, nodes);
+        var box = new HBox(spacing);
+        addNodes(box, Arrays.asList(nodes));
+        return box;
     }
 
     /**
@@ -41,9 +46,7 @@ public interface BoxFactory {
      */
     static HBox hBox(List<Node> nodes, Consumer<HBox> setup) {
         var box = new HBox();
-        nodes.stream()
-            .filter(n -> n != SKIP)
-            .forEach(n -> box.getChildren().add(n));
+        addNodes(box, nodes);
         setup.accept(box);
         return box;
     }
@@ -56,7 +59,9 @@ public interface BoxFactory {
      * @return VBox instance
      */
     static VBox vBox(double spacing, Node... nodes) {
-        return new VBox(spacing, nodes);
+        var box = new VBox(spacing);
+        addNodes(box, Arrays.asList(nodes));
+        return box;
     }
 
     /**
@@ -68,10 +73,16 @@ public interface BoxFactory {
      */
     static VBox vBox(List<Node> nodes, Consumer<VBox> setup) {
         var box = new VBox();
-        nodes.stream()
-            .filter(n -> n != SKIP)
-            .forEach(n -> box.getChildren().add(n));
+        addNodes(box, nodes);
         setup.accept(box);
         return box;
+    }
+
+    private static void addNodes(Pane box, Collection<Node> nodes) {
+        for (var node : nodes) {
+            if (node != SKIP) {
+                box.getChildren().add(node);
+            }
+        }
     }
 }
