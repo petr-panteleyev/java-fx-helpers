@@ -9,9 +9,14 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.panteleyev</groupId>
+    <parent>
+        <groupId>org.panteleyev</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.6.2</version>
+    <version>1.7.0</version>
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>JavaFX helper classes</description>
@@ -36,50 +41,27 @@
         <url>https://github.com/petr-panteleyev/java-fx-helpers/tree/master</url>
     </scm>
 
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
-        <!-- dependencies -->
-        <javaFxVersion>15</javaFxVersion>
-        <testNgVersion>7.3.0</testNgVersion>
-        <!-- plugins -->
-        <mavenToolchainPluginVersion>3.0.0</mavenToolchainPluginVersion>
-        <mavenCompilerPluginVersion>3.8.1</mavenCompilerPluginVersion>
-        <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
-        <mavenSurefirePluginVersion>3.0.0-M4</mavenSurefirePluginVersion>
-        <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
-        <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
-        <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
-            <version>${javaFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>${javaFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>${javaFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testNgVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
-            <version>${javaFxVersion}</version>
         </dependency>
     </dependencies>
 
@@ -88,26 +70,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-toolchains-plugin</artifactId>
-                <version>${mavenToolchainPluginVersion}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>toolchain</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <toolchains>
-                        <jdk>
-                            <version>${maven.compiler.target}</version>
-                        </jdk>
-                    </toolchains>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${mavenCompilerPluginVersion}</version>
                 <configuration>
                     <compilerArgs>
                         <arg>--enable-preview</arg>
@@ -117,11 +83,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${mavenJavadocPluginVersion}</version>
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <author>false</author>
-                    <bottom><![CDATA[Copyright &copy; 2015, 2020, Petr Panteleyev]]></bottom>
+                    <bottom><![CDATA[Copyright &copy; 2015, 2021, Petr Panteleyev]]></bottom>
                     <additionalOptions>-html5 --enable-preview --source ${maven.compiler.source}</additionalOptions>
                     <show>protected</show>
                     <doclint>none</doclint>
@@ -138,7 +103,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${mavenSurefirePluginVersion}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
@@ -149,40 +113,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>${mavenSourcePluginVersion}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>${mavenGpgPluginVersion}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${nexusStagingMavenPlugin}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
             </plugin>
         </plugins>
     </build>
