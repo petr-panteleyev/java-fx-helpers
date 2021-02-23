@@ -9,13 +9,16 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 /**
- * This interface provides common utility methods.
+ * This class provides common utility methods.
  */
-public interface FxUtils {
+public final class FxUtils {
+    private FxUtils() {
+    }
+
     /**
      * Special node that represents empty cell or nothing depending on API.
      */
-    Node SKIP = new Node() {
+    public static final Node SKIP = new Node() {
     };
 
     /**
@@ -26,7 +29,7 @@ public interface FxUtils {
      * @param <T>   type of the node
      * @return node
      */
-    static <T extends Node> T fxNode(T node, Consumer<T> setup) {
+    public static <T extends Node> T fxNode(T node, Consumer<T> setup) {
         setup.accept(node);
         return node;
     }
@@ -38,7 +41,7 @@ public interface FxUtils {
      * @param key    key in resource bundle
      * @return string
      */
-    static String fxString(ResourceBundle bundle, String key) {
+    public static String fxString(ResourceBundle bundle, String key) {
         return bundle.getString(key);
     }
 
@@ -51,7 +54,7 @@ public interface FxUtils {
      * @param suffix suffix that is appended to the string
      * @return string
      */
-    static String fxString(ResourceBundle bundle, String key, String suffix) {
+    public static String fxString(ResourceBundle bundle, String key, String suffix) {
         return bundle.getString(key) + suffix;
     }
 
@@ -62,7 +65,7 @@ public interface FxUtils {
      * @param suffix suffix that is appended to the string
      * @return string
      */
-    static String fxString(String str, String suffix) {
+    public static String fxString(String str, String suffix) {
         return str + suffix;
     }
 }

@@ -7,3 +7,12 @@ This library provides JavaFX helper classes.
 [![JavaFX](https://img.shields.io/badge/JavaFX-15-orange?logo=java)](https://openjfx.io/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.panteleyev/java-fx-helpers/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.panteleyev/java-fx-helpers/)
 [![Javadocs](http://www.javadoc.io/badge/org.panteleyev/java-fx-helpers.svg)](http://www.javadoc.io/doc/org.panteleyev/java-fx-helpers)
+
+## Build
+
+Make sure ```JAVA_HOME``` is set to JDK 15.
+
+Execute the following:
+```shell script
+$ mvn clean install
+```

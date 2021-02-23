@@ -18,13 +18,10 @@ import java.util.ResourceBundle;
  * @param <R> The return type of the dialog, via the result property.
  */
 public class BaseDialog<R> extends Dialog<R> {
-    private static final URL CSS = BaseDialog.class.getResource("/org/panteleyev/fx/fx.css");
-
     /**
-     * Creates dialog instance with no owner and default style sheet.
+     * Creates dialog instance with no owner and no style sheet.
      */
     public BaseDialog() {
-        getDialogPane().getStylesheets().add(CSS.toString());
     }
 
     /**

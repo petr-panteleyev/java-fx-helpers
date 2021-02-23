@@ -15,9 +15,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 
 /**
- * This interface provides convenience methods to create menus, menu items, etc.
+ * This class provides convenience methods to create menus, menu items, etc.
  */
-public interface MenuFactory {
+public final class MenuFactory {
+    private MenuFactory() {
+    }
 
     /**
      * Creates new menu item.
@@ -26,7 +28,7 @@ public interface MenuFactory {
      * @param action menu item action
      * @return menu item
      */
-    static MenuItem menuItem(String text, EventHandler<ActionEvent> action) {
+    public static MenuItem menuItem(String text, EventHandler<ActionEvent> action) {
         var menuItem = new MenuItem(text);
         menuItem.setOnAction(action);
         return menuItem;
@@ -40,7 +42,7 @@ public interface MenuFactory {
      * @param action         menu item action
      * @return menu item
      */
-    static MenuItem menuItem(String text, KeyCombination keyCombination, EventHandler<ActionEvent> action) {
+    public static MenuItem menuItem(String text, KeyCombination keyCombination, EventHandler<ActionEvent> action) {
         var menuItem = menuItem(text, action);
         menuItem.setAccelerator(keyCombination);
         return menuItem;
@@ -54,7 +56,7 @@ public interface MenuFactory {
      * @param disableBinding boolean binding to disable menu item
      * @return menu item
      */
-    static MenuItem menuItem(String text, EventHandler<ActionEvent> action, BooleanBinding disableBinding) {
+    public static MenuItem menuItem(String text, EventHandler<ActionEvent> action, BooleanBinding disableBinding) {
         var menuItem = menuItem(text, action);
         menuItem.disableProperty().bind(disableBinding);
         return menuItem;
@@ -69,11 +71,10 @@ public interface MenuFactory {
      * @param disableBinding boolean binding to disable menu item
      * @return menu item
      */
-    static MenuItem menuItem(String text,
-                             KeyCombination keyCombination,
-                             EventHandler<ActionEvent> action,
-                             BooleanBinding disableBinding)
-    {
+    public static MenuItem menuItem(String text,
+                                    KeyCombination keyCombination,
+                                    EventHandler<ActionEvent> action,
+                                    BooleanBinding disableBinding) {
         var menuItem = menuItem(text, keyCombination, action);
         menuItem.disableProperty().bind(disableBinding);
         return menuItem;
@@ -86,7 +87,7 @@ public interface MenuFactory {
      * @param selected initial selected state
      * @return menu item
      */
-    static CheckMenuItem checkMenuItem(String text, boolean selected) {
+    public static CheckMenuItem checkMenuItem(String text, boolean selected) {
         var menuItem = new CheckMenuItem(text);
         menuItem.setSelected(selected);
         return menuItem;
@@ -100,7 +101,7 @@ public interface MenuFactory {
      * @param action   menu item action
      * @return menu item
      */
-    static CheckMenuItem checkMenuItem(String text, boolean selected, EventHandler<ActionEvent> action) {
+    public static CheckMenuItem checkMenuItem(String text, boolean selected, EventHandler<ActionEvent> action) {
         var menuItem = new CheckMenuItem(text);
         menuItem.setSelected(selected);
         menuItem.setOnAction(action);
@@ -115,7 +116,7 @@ public interface MenuFactory {
      * @param keyCombination menu item accelerator
      * @return menu item
      */
-    static CheckMenuItem checkMenuItem(String text, boolean selected, KeyCombination keyCombination) {
+    public static CheckMenuItem checkMenuItem(String text, boolean selected, KeyCombination keyCombination) {
         var menuItem = new CheckMenuItem(text);
         menuItem.setSelected(selected);
         menuItem.setAccelerator(keyCombination);
@@ -131,11 +132,10 @@ public interface MenuFactory {
      * @param action         menu item action
      * @return menu item
      */
-    static CheckMenuItem checkMenuItem(String text,
-                                       boolean selected,
-                                       KeyCombination keyCombination,
-                                       EventHandler<ActionEvent> action)
-    {
+    public static CheckMenuItem checkMenuItem(String text,
+                                              boolean selected,
+                                              KeyCombination keyCombination,
+                                              EventHandler<ActionEvent> action) {
         var menuItem = new CheckMenuItem(text);
         menuItem.setSelected(selected);
         menuItem.setAccelerator(keyCombination);
@@ -150,7 +150,7 @@ public interface MenuFactory {
      * @param items menu items
      * @return menu
      */
-    static Menu newMenu(String text, MenuItem... items) {
+    public static Menu newMenu(String text, MenuItem... items) {
         return new Menu(text, null, items);
     }
 
@@ -162,7 +162,7 @@ public interface MenuFactory {
      * @param items menu items
      * @return menu
      */
-    static Menu menu(String text, Node node, MenuItem... items) {
+    public static Menu menu(String text, Node node, MenuItem... items) {
         return new Menu(text, node, items);
     }
 
@@ -172,7 +172,7 @@ public interface MenuFactory {
      * @param menus menus
      * @return menu bar
      */
-    static MenuBar menuBar(Menu... menus) {
+    public static MenuBar menuBar(Menu... menus) {
         var menuBar = new MenuBar(menus);
         menuBar.setUseSystemMenuBar(true);
         return menuBar;
