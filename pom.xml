@@ -9,14 +9,10 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.panteleyev</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.1.0</version>
-    </parent>
-
+    <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.7.0</version>
+    <version>1.8.0</version>
+
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>JavaFX helper classes</description>
@@ -41,27 +37,54 @@
         <url>https://github.com/petr-panteleyev/java-fx-helpers/tree/master</url>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>16</maven.compiler.release>
+        <!-- Plugins -->
+        <mavenCompilerPluginVersion>3.8.1</mavenCompilerPluginVersion>
+        <mavenJarPluginVersion>3.2.0</mavenJarPluginVersion>
+        <mavenSurefirePluginVersion>3.0.0-M5</mavenSurefirePluginVersion>
+        <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
+        <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
+        <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
+        <!-- Dependencies -->
+        <javaFxVersion>16</javaFxVersion>
+        <testNgVersion>7.3.0</testNgVersion>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
+            <version>${javaFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
+            <version>${javaFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <scope>test</scope>
+            <version>${javaFxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
+            <version>${javaFxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testNgVersion}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -69,25 +92,18 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-toolchains-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerArgs>
-                        <arg>--enable-preview</arg>
-                    </compilerArgs>
-                </configuration>
+                <version>${mavenCompilerPluginVersion}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${mavenJavadocPluginVersion}</version>
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <author>false</author>
                     <bottom><![CDATA[Copyright &copy; 2015, 2021, Petr Panteleyev]]></bottom>
-                    <additionalOptions>-html5 --enable-preview --source ${maven.compiler.source}</additionalOptions>
+                    <additionalOptions>-html5 --release ${maven.compiler.release}</additionalOptions>
                     <show>protected</show>
                     <doclint>none</doclint>
                 </configuration>
@@ -103,24 +119,39 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>${mavenSurefirePluginVersion}</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <argLine>--enable-preview</argLine>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>${mavenSourcePluginVersion}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${mavenGpgPluginVersion}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

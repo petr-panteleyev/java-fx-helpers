@@ -8,16 +8,19 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 /**
- * This interface provides convenience methods to create objects of {@link javafx.scene.control.Label}.
+ * This class provides convenience methods to create objects of {@link javafx.scene.control.Label}.
  */
-public interface LabelFactory {
+public final class LabelFactory {
+    private LabelFactory() {
+    }
+
     /**
      * Creates new label.
      *
      * @param text label text
      * @return label
      */
-    static Label label(String text) {
+    public static Label label(String text) {
         return new Label(text);
     }
 
@@ -28,7 +31,7 @@ public interface LabelFactory {
      * @param graphic label graphic node
      * @return label
      */
-    static Label label(String text, Node graphic) {
+    public static Label label(String text, Node graphic) {
         return new Label(text, graphic);
     }
 }

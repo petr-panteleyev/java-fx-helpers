@@ -13,10 +13,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * This interface provides convenience methods to create buttons.
+ * This class provides convenience methods to create buttons.
  */
-public interface ButtonFactory {
-    static ButtonType buttonType(String text, ButtonBar.ButtonData position) {
+public final class ButtonFactory {
+    public static ButtonType buttonType(String text, ButtonBar.ButtonData position) {
         return new ButtonType(text, position);
     }
 
@@ -26,7 +26,7 @@ public interface ButtonFactory {
      * @param text button text
      * @return button
      */
-    static Button button(String text) {
+    public static Button button(String text) {
         return new Button(text);
     }
 
@@ -37,7 +37,7 @@ public interface ButtonFactory {
      * @param action button action
      * @return button
      */
-    static Button button(String text, EventHandler<ActionEvent> action) {
+    public static Button button(String text, EventHandler<ActionEvent> action) {
         var button = new Button(text);
         button.setOnAction(action);
         return button;
@@ -50,7 +50,7 @@ public interface ButtonFactory {
      * @param group toggle group
      * @return button
      */
-    static RadioButton radioButton(String text, ToggleGroup group) {
+    public static RadioButton radioButton(String text, ToggleGroup group) {
         var button = new RadioButton(text);
         button.setToggleGroup(group);
         return button;
@@ -64,7 +64,7 @@ public interface ButtonFactory {
      * @param selected initial selected state
      * @return button
      */
-    static RadioButton radioButton(String text, ToggleGroup group, boolean selected) {
+    public static RadioButton radioButton(String text, ToggleGroup group, boolean selected) {
         var button = new RadioButton(text);
         button.setToggleGroup(group);
         button.setSelected(selected);

@@ -1,9 +1,8 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -14,7 +13,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.stream.Collectors;
 import static org.testng.Assert.assertEquals;
 
 public class TestWindowManager {
@@ -80,7 +78,7 @@ public class TestWindowManager {
 
     @Test
     public void testControllerStream() {
-        assertEquals(windowManager.getControllerStream().collect(Collectors.toList()), List.of(c1, c2, c3));
+        assertEquals(windowManager.getControllerStream().toList(), List.of(c1, c2, c3));
     }
 
     @DataProvider

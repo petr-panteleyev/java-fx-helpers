@@ -16,11 +16,14 @@ import java.util.function.Consumer;
 import static org.panteleyev.fx.FxUtils.SKIP;
 
 /**
- * This interface provides methods to create instances of {@link HBox} and {@link VBox}.
+ * This class provides methods to create instances of {@link HBox} and {@link VBox}.
  * This API respects special node value {@link FxUtils#SKIP}.
  */
-public interface BoxFactory {
-    static Consumer<Node> hBoxHGrow(Priority priority) {
+public final class BoxFactory {
+    private BoxFactory() {
+    }
+
+    public static Consumer<Node> hBoxHGrow(Priority priority) {
         return node -> HBox.setHgrow(node, priority);
     }
 
@@ -31,7 +34,7 @@ public interface BoxFactory {
      * @param nodes   the initial set of child nodes for this pane
      * @return HBox instance
      */
-    static HBox hBox(double spacing, Node... nodes) {
+    public static HBox hBox(double spacing, Node... nodes) {
         var box = new HBox(spacing);
         addNodes(box, Arrays.asList(nodes));
         return box;
@@ -44,7 +47,7 @@ public interface BoxFactory {
      * @param setup setup function
      * @return HBox instance
      */
-    static HBox hBox(List<Node> nodes, Consumer<HBox> setup) {
+    public static HBox hBox(List<Node> nodes, Consumer<HBox> setup) {
         var box = new HBox();
         addNodes(box, nodes);
         setup.accept(box);
@@ -58,7 +61,7 @@ public interface BoxFactory {
      * @param nodes   the initial set of children for this pane
      * @return VBox instance
      */
-    static VBox vBox(double spacing, Node... nodes) {
+    public static VBox vBox(double spacing, Node... nodes) {
         var box = new VBox(spacing);
         addNodes(box, Arrays.asList(nodes));
         return box;
@@ -71,7 +74,7 @@ public interface BoxFactory {
      * @param setup setup function
      * @return HBox instance
      */
-    static VBox vBox(List<Node> nodes, Consumer<VBox> setup) {
+    public static VBox vBox(List<Node> nodes, Consumer<VBox> setup) {
         var box = new VBox();
         addNodes(box, nodes);
         setup.accept(box);
