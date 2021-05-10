@@ -12,6 +12,9 @@ import java.util.function.Consumer;
  * This class provides common utility methods.
  */
 public final class FxUtils {
+    public static final String ELLIPSIS = "...";
+    public static final String COLON = ":";
+
     private FxUtils() {
     }
 
