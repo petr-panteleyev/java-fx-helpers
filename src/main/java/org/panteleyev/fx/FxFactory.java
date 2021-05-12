@@ -38,6 +38,27 @@ public final class FxFactory {
     }
 
     /**
+     * Creates new text field.
+     * @param prefColumnCount the preferred number of text columns
+     * @return text field
+     */
+    public static TextField textField(int prefColumnCount) {
+        return textField("", prefColumnCount);
+    }
+
+    /**
+     * Creates new text field.
+     * @param initialValue initial value
+     * @param prefColumnCount the preferred number of text columns
+     * @return text field
+     */
+    public static TextField textField(String initialValue, int prefColumnCount) {
+        var textField = new TextField(initialValue);
+        textField.setPrefColumnCount(prefColumnCount);
+        return textField;
+    }
+
+    /**
      * Creates new check box.
      *
      * @param rb  resource bundle

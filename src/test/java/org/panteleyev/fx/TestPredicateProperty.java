@@ -1,9 +1,8 @@
-package org.panteleyev.fx;
-
 /*
  Copyright (c) Petr Panteleyev. All rights reserved.
  Licensed under the BSD license. See LICENSE file in the project root for full license information.
  */
+package org.panteleyev.fx;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
