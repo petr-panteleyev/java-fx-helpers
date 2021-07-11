@@ -85,5 +85,13 @@ public class Controller {
         }
         stage.setTitle(getTitle());
         stage.setScene(scene);
+
+        stage.setOnHiding(event -> onWindowHiding());
+    }
+
+    /**
+     * Actions performed on Hiding event.
+     */
+    protected void onWindowHiding() {
     }
 }
