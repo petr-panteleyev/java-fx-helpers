@@ -7,15 +7,13 @@ package org.panteleyev.fx;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.util.Objects;
 
 /**
  * Base class for UI controller.
  */
 public class Controller {
-    private Stage stage;
-
+    private final Stage stage;
     private final String css;
 
     /**
@@ -26,19 +24,17 @@ public class Controller {
      * @throws NullPointerException if stage is null
      */
     public Controller(Stage stage, String css) {
-        Objects.requireNonNull(stage);
-
-        this.stage = stage;
+        this.stage = Objects.requireNonNull(stage);
         this.css = css;
     }
 
     /**
-     * Creates controller for which stage will be created later.
+     * Creates controller with empty stage that has to be configured later.
      *
      * @param css optional css resource path
      */
     public Controller(String css) {
-        this.stage = null;
+        this.stage = new Stage();
         this.css = css;
     }
 
@@ -65,7 +61,7 @@ public class Controller {
     }
 
     /**
-     * Creates stage for given root node.
+     * Configures stage for given root node.
      * <p>
      * Controller reference is stored in the {@link Scene scene} object using
      * {@link Scene#setUserData(Object)} method.
@@ -75,10 +71,6 @@ public class Controller {
     protected final void setupWindow(Parent root) {
         var scene = new Scene(root);
         scene.setUserData(this);
-
-        if (stage == null) {
-            stage = new Stage();
-        }
 
         if (css != null) {
             scene.getStylesheets().add(css);
@@ -93,5 +85,37 @@ public class Controller {
      * Actions performed on Hiding event.
      */
     protected void onWindowHiding() {
+    }
+
+    /**
+     * Returns position and size of the controller stage.
+     *
+     * @return stage position and size
+     */
+    public StagePositionAndSize getStagePositionAndSize() {
+        return new StagePositionAndSize(
+            stage.getX(), stage.getY(),
+            stage.getWidth(), stage.getHeight(),
+            stage.isMaximized()
+        );
+    }
+
+    /**
+     * Sets position and size of the controller stage.
+     *
+     * @param positionAndSize stage position and size. Ignored if {@code null}.
+     */
+    public void setStagePositionAndSize(StagePositionAndSize positionAndSize) {
+        if (positionAndSize == null) {
+            return;
+        }
+
+        stage.setX(positionAndSize.x());
+        stage.setY(positionAndSize.y());
+        stage.setWidth(positionAndSize.width());
+        stage.setHeight(positionAndSize.height());
+        if (positionAndSize.maximized()) {
+            stage.setMaximized(true);
+        }
     }
 }
