@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Dimension2D;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -19,15 +20,13 @@ import java.util.function.Function;
 
 /**
  * This class implements builder that creates instances of {@link ComboBox}. Builder configuration is done using
- * user defined consumer. Example:<br>
- * <pre>
- * {@code
+ * user defined consumer. Example:
+ * {@snippet :
  * var comboBox = comboBox(listOf("1", "2", "3"), b -> {
  *      b.withDefaultValue("10");
- *      b.withHandler(event -> { ... })
+ *      b.withHandler(event -> {  });
  * });
  * }
- * </pre>
  *
  * @param <T> type of the {@link ComboBox} items
  */
@@ -36,6 +35,7 @@ public class ComboBoxBuilder<T> {
     private String defaultString = "";
     private Function<T, String> stringConverter = Object::toString;
     private Function<T, Image> imageConverter = x -> null;
+    private Dimension2D imageDimension = null;
     private EventHandler<ActionEvent> handler = event -> {};
     private Callback<ListView<T>, ListCell<T>> cellFactory;
 
@@ -138,12 +138,23 @@ public class ComboBoxBuilder<T> {
         return this;
     }
 
+    /**
+     * Sets image dimension for {@link ComboBoxBuilder#withImageConverter(Function)}.
+     *
+     * @param dimension image dimension
+     * @return <code>this</code>
+     */
+    public ComboBoxBuilder<T> withImageDimension(Dimension2D dimension) {
+        this.imageDimension = dimension;
+        return this;
+    }
+
     private ComboBox<T> build() {
         var cb = new ComboBoxImpl<T>(items, defaultString);
         cb.setOnAction(handler);
 
         if (cellFactory == null) {
-            cellFactory = x -> new ComboBoxListCellImpl<>(defaultString, stringConverter, imageConverter);
+            cellFactory = x -> new ComboBoxListCellImpl<>(defaultString, stringConverter, imageConverter, imageDimension);
         }
         cb.setCellFactory(cellFactory);
         cb.setButtonCell(cellFactory.call(null));

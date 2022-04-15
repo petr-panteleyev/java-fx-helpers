@@ -4,6 +4,7 @@
  */
 package org.panteleyev.fx.combobox;
 
+import javafx.geometry.Dimension2D;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,10 +15,12 @@ class ComboBoxListCellImpl<T> extends ComboBoxListCell<T> {
     private final String defaultValue;
     private final Function<T, String> converter;
     private final Function<T, Image> toImageConverter;
+    private final Dimension2D imageDimension;
 
     public ComboBoxListCellImpl(String defaultValue,
                                 Function<T, String> converter,
-                                Function<T, Image> toImageConverter)
+                                Function<T, Image> toImageConverter,
+                                Dimension2D imageDimension)
     {
         Objects.requireNonNull(converter);
         Objects.requireNonNull(toImageConverter);
@@ -25,6 +28,7 @@ class ComboBoxListCellImpl<T> extends ComboBoxListCell<T> {
         this.defaultValue = defaultValue;
         this.converter = converter;
         this.toImageConverter = toImageConverter;
+        this.imageDimension = imageDimension;
     }
 
     public String getDefaultValue() {
@@ -40,7 +44,16 @@ class ComboBoxListCellImpl<T> extends ComboBoxListCell<T> {
             setGraphic(null);
         } else {
             var image = toImageConverter.apply(value);
-            setGraphic(image == null ? null : new ImageView(image));
+            if (image != null) {
+                var view = new ImageView(image);
+                if (imageDimension != null) {
+                    view.setFitWidth(imageDimension.getWidth());
+                    view.setFitHeight(imageDimension.getHeight());
+                }
+                setGraphic(view);
+            } else {
+                setGraphic(null);
+            }
         }
     }
 }

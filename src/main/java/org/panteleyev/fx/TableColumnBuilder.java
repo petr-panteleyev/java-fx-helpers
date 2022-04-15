@@ -96,14 +96,10 @@ public class TableColumnBuilder<S, T> {
      * table view width.
      * </p>
      * <p><b>Example:</b></p>
-     * <p>
-     * <pre>
-     * {@code
+     * {@snippet :
      * var w = tableView.widthProperty();
      * var column = tableColumn("Text", b -> b.withWidthBinding(w.multiply(0.15)));
      * }
-     * </pre>
-     * </p>
      *
      * @param widthBinding binding for widthProperty()
      * @return this

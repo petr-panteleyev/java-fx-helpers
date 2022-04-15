@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.9.0</version>
+    <version>1.10.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,7 +39,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>16</maven.compiler.release>
+        <maven.compiler.release>18</maven.compiler.release>
         <!-- Plugins -->
         <mavenCompilerPluginVersion>3.8.1</mavenCompilerPluginVersion>
         <mavenJarPluginVersion>3.2.0</mavenJarPluginVersion>
@@ -49,8 +49,8 @@
         <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
         <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
         <!-- Dependencies -->
-        <javaFxVersion>16</javaFxVersion>
-        <testNgVersion>7.3.0</testNgVersion>
+        <javaFxVersion>18</javaFxVersion>
+        <testNgVersion>7.5</testNgVersion>
     </properties>
 
     <dependencies>
