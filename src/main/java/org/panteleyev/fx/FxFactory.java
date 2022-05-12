@@ -77,6 +77,7 @@ public final class FxFactory {
      * @param closeable closeable flag
      * @return tab
      */
+    @Deprecated
     public static Tab newTab(ResourceBundle rb, String key, boolean closeable) {
         var tab = new Tab(rb.getString(key));
         tab.setClosable(closeable);
@@ -92,6 +93,7 @@ public final class FxFactory {
      * @param node      tab content
      * @return tab
      */
+    @Deprecated
     public static Tab newTab(ResourceBundle rb, String key, boolean closeable, Node node) {
         var tab = new Tab(rb.getString(key), node);
         tab.setClosable(closeable);

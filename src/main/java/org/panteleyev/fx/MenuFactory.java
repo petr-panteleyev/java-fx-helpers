@@ -37,6 +37,20 @@ public final class MenuFactory {
     /**
      * Creates new menu item.
      *
+     * @param text   menu item text
+     * @param node   menu item node
+     * @param action menu item action
+     * @return menu item
+     */
+    public static MenuItem menuItem(String text, Node node, EventHandler<ActionEvent> action) {
+        var menuItem = new MenuItem(text, node);
+        menuItem.setOnAction(action);
+        return menuItem;
+    }
+
+    /**
+     * Creates new menu item.
+     *
      * @param text           menu item text
      * @param keyCombination menu item accelerator
      * @param action         menu item action
@@ -44,6 +58,22 @@ public final class MenuFactory {
      */
     public static MenuItem menuItem(String text, KeyCombination keyCombination, EventHandler<ActionEvent> action) {
         var menuItem = menuItem(text, action);
+        menuItem.setAccelerator(keyCombination);
+        return menuItem;
+    }
+
+    /**
+     * Creates new menu item.
+     *
+     * @param text           menu item text
+     * @param node           menu item node
+     * @param keyCombination menu item accelerator
+     * @param action         menu item action
+     * @return menu item
+     */
+    public static MenuItem menuItem(String text, Node node, KeyCombination keyCombination,
+                                    EventHandler<ActionEvent> action) {
+        var menuItem = menuItem(text, node, action);
         menuItem.setAccelerator(keyCombination);
         return menuItem;
     }
@@ -66,6 +96,22 @@ public final class MenuFactory {
      * Creates new menu item.
      *
      * @param text           menu item text
+     * @param node           menu item node
+     * @param action         menu item action
+     * @param disableBinding boolean binding to disable menu item
+     * @return menu item
+     */
+    public static MenuItem menuItem(String text, Node node, EventHandler<ActionEvent> action,
+                                    BooleanBinding disableBinding) {
+        var menuItem = menuItem(text, node, action);
+        menuItem.disableProperty().bind(disableBinding);
+        return menuItem;
+    }
+
+    /**
+     * Creates new menu item.
+     *
+     * @param text           menu item text
      * @param keyCombination menu item accelerator
      * @param action         menu item action
      * @param disableBinding boolean binding to disable menu item
@@ -76,6 +122,26 @@ public final class MenuFactory {
                                     EventHandler<ActionEvent> action,
                                     BooleanBinding disableBinding) {
         var menuItem = menuItem(text, keyCombination, action);
+        menuItem.disableProperty().bind(disableBinding);
+        return menuItem;
+    }
+
+    /**
+     * Creates new menu item.
+     *
+     * @param text           menu item text
+     * @param node           menu item node
+     * @param keyCombination menu item accelerator
+     * @param action         menu item action
+     * @param disableBinding boolean binding to disable menu item
+     * @return menu item
+     */
+    public static MenuItem menuItem(String text,
+                                    Node node,
+                                    KeyCombination keyCombination,
+                                    EventHandler<ActionEvent> action,
+                                    BooleanBinding disableBinding) {
+        var menuItem = menuItem(text, node, keyCombination, action);
         menuItem.disableProperty().bind(disableBinding);
         return menuItem;
     }
