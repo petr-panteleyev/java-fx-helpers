@@ -1,6 +1,6 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx.combobox;
 
@@ -14,6 +14,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.util.Callback;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -24,9 +25,9 @@ import java.util.function.Function;
  * {@snippet :
  * var comboBox = comboBox(listOf("1", "2", "3"), b -> {
  *      b.withDefaultValue("10");
- *      b.withHandler(event -> {  });
+ *      b.withHandler(event -> {});
  * });
- * }
+ *}
  *
  * @param <T> type of the {@link ComboBox} items
  */
@@ -154,7 +155,8 @@ public class ComboBoxBuilder<T> {
         cb.setOnAction(handler);
 
         if (cellFactory == null) {
-            cellFactory = x -> new ComboBoxListCellImpl<>(defaultString, stringConverter, imageConverter, imageDimension);
+            cellFactory = x -> new ComboBoxListCellImpl<>(defaultString, stringConverter, imageConverter,
+                    imageDimension);
         }
         cb.setCellFactory(cellFactory);
         cb.setButtonCell(cellFactory.call(null));

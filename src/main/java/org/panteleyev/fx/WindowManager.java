@@ -1,11 +1,12 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
 import javafx.collections.ObservableList;
 import javafx.stage.Window;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -38,7 +39,7 @@ public final class WindowManager {
      */
     public Optional<Controller> find(Class<? extends Controller> ctrlClass) {
         return getControllerStream(ctrlClass)
-            .findFirst();
+                .findFirst();
     }
 
     /**
@@ -59,8 +60,8 @@ public final class WindowManager {
      */
     public Optional<Controller> find(Class<? extends Controller> ctrlClass, Predicate<Controller> enumerator) {
         return getControllerStream(ctrlClass)
-            .filter(enumerator)
-            .findFirst();
+                .filter(enumerator)
+                .findFirst();
     }
 
     /**
@@ -70,9 +71,9 @@ public final class WindowManager {
      */
     public Stream<Controller> getControllerStream() {
         return windowListSupplier.get().stream()
-            .map(Window::getScene)
-            .filter(w -> w.getUserData() != null && Controller.class.isAssignableFrom(w.getUserData().getClass()))
-            .map(window -> (Controller) window.getUserData());
+                .map(Window::getScene)
+                .filter(w -> w.getUserData() != null && Controller.class.isAssignableFrom(w.getUserData().getClass()))
+                .map(window -> (Controller) window.getUserData());
     }
 
     /**
@@ -83,8 +84,8 @@ public final class WindowManager {
      */
     public Stream<Controller> getControllerStream(Class<? extends Controller> ctrlClass) {
         return windowListSupplier.get().stream()
-            .map(Window::getScene)
-            .filter(w -> w.getUserData() != null && ctrlClass.equals(w.getUserData().getClass()))
-            .map(window -> (Controller) window.getUserData());
+                .map(Window::getScene)
+                .filter(w -> w.getUserData() != null && ctrlClass.equals(w.getUserData().getClass()))
+                .map(window -> (Controller) window.getUserData());
     }
 }

@@ -1,3 +1,7 @@
+/*
+ Copyright © 2022 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
+ */
 package org.panteleyev.fx;
 
 import javafx.scene.Node;
@@ -24,8 +28,8 @@ public abstract class TabFactory {
     /**
      * Creates new non-closeable tab.
      *
-     * @param title     tab title
-     * @param node      child node
+     * @param title tab title
+     * @param node  child node
      * @return tab
      */
     public static Tab tab(String title, Node node) {

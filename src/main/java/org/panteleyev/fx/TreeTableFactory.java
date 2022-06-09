@@ -1,6 +1,6 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
@@ -35,11 +35,10 @@ public final class TreeTableFactory {
      * @return table column
      */
     public static <S, T> TreeTableColumn<S, T> treeTableColumn(
-        String text,
-        Callback<TreeTableColumn<S, T>, TreeTableCell<S, T>> cellFactory,
-        Callback<S, T> propertyCallback,
-        ObservableValue<? extends Number> widthBinding)
-    {
+            String text,
+            Callback<TreeTableColumn<S, T>, TreeTableCell<S, T>> cellFactory,
+            Callback<S, T> propertyCallback,
+            ObservableValue<? extends Number> widthBinding) {
         var column = new TreeTableColumn<S, T>(text);
         column.setSortable(false);
 
@@ -49,7 +48,7 @@ public final class TreeTableFactory {
 
         if (propertyCallback != null) {
             column.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(
-                propertyCallback.call(p.getValue().getValue())));
+                    propertyCallback.call(p.getValue().getValue())));
         }
 
         if (widthBinding != null) {
@@ -68,10 +67,9 @@ public final class TreeTableFactory {
      * @return table column
      */
     public static <S> TreeTableColumn<S, S> treeTableColumn(
-        String text,
-        Callback<TreeTableColumn<S, S>, TreeTableCell<S, S>> cellFactory,
-        ObservableValue<? extends Number> widthBinding)
-    {
+            String text,
+            Callback<TreeTableColumn<S, S>, TreeTableCell<S, S>> cellFactory,
+            ObservableValue<? extends Number> widthBinding) {
         var column = treeTableColumn(text, cellFactory, p -> p, widthBinding);
         column.setSortable(true);
         return column;

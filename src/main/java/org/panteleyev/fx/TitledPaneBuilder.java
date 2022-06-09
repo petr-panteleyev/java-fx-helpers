@@ -1,11 +1,12 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
 import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
+
 import java.util.function.Consumer;
 
 /**

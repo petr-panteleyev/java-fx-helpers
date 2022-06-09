@@ -1,6 +1,6 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -39,6 +40,7 @@ public final class FxFactory {
 
     /**
      * Creates new text field.
+     *
      * @param prefColumnCount the preferred number of text columns
      * @return text field
      */
@@ -48,7 +50,8 @@ public final class FxFactory {
 
     /**
      * Creates new text field.
-     * @param initialValue initial value
+     *
+     * @param initialValue    initial value
      * @param prefColumnCount the preferred number of text columns
      * @return text field
      */

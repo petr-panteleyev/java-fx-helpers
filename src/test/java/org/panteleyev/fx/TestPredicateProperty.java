@@ -1,13 +1,15 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.util.List;
 import java.util.UUID;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -30,9 +32,9 @@ public class TestPredicateProperty {
     @DataProvider
     public Object[][] orDataProvider() {
         return new Object[][]{
-            {20, 30, 15, true},
-            {20, 30, 40, true},
-            {20, 30, 25, false},
+                {20, 30, 15, true},
+                {20, 30, 40, true},
+                {20, 30, 25, false},
         };
     }
 

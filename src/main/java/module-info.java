@@ -1,3 +1,7 @@
+/*
+ Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
+ */
 /**
  * This module implements helper classes for JavaFX.
  */

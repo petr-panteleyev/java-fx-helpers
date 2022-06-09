@@ -1,6 +1,6 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
+
 import java.util.Comparator;
 import java.util.function.Consumer;
 
@@ -99,7 +100,7 @@ public class TableColumnBuilder<S, T> {
      * {@snippet :
      * var w = tableView.widthProperty();
      * var column = tableColumn("Text", b -> b.withWidthBinding(w.multiply(0.15)));
-     * }
+     *}
      *
      * @param widthBinding binding for widthProperty()
      * @return this

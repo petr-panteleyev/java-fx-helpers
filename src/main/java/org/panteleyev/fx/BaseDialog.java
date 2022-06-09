@@ -1,6 +1,6 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -77,8 +78,8 @@ public class BaseDialog<R> extends Dialog<R> {
      */
     protected void createDefaultButtons(ResourceBundle rb, ReadOnlyBooleanProperty validationInvalidProperty) {
         getDialogPane().getButtonTypes().addAll(
-            ButtonType.OK,
-            ButtonType.CANCEL);
+                ButtonType.OK,
+                ButtonType.CANCEL);
 
         if (validationInvalidProperty != null) {
             var btOk = (Button) getDialogPane().lookupButton(ButtonType.OK);

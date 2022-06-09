@@ -1,6 +1,6 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
@@ -11,8 +11,10 @@ import javafx.scene.layout.BorderPane;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
+
 import static org.testng.Assert.assertEquals;
 
 public class TestWindowManager {
@@ -59,11 +61,11 @@ public class TestWindowManager {
             c3 = new ControllerWithPredicate(true);
 
             windowManager = WindowManager.newInstance(() ->
-                FXCollections.observableArrayList(
-                    c1.getStage(),
-                    c2.getStage(),
-                    c3.getStage()
-                ));
+                    FXCollections.observableArrayList(
+                            c1.getStage(),
+                            c2.getStage(),
+                            c3.getStage()
+                    ));
 
             queue.add(1);
         });
@@ -84,8 +86,8 @@ public class TestWindowManager {
     @DataProvider
     public Object[][] findDataProvider() {
         return new Object[][]{
-            {BaseTestController.class, c1},
-            {ControllerWithPredicate.class, c2}
+                {BaseTestController.class, c1},
+                {ControllerWithPredicate.class, c2}
         };
     }
 
@@ -99,18 +101,17 @@ public class TestWindowManager {
     @DataProvider
     public Object[][] findWithPredicateDataProvider() {
         return new Object[][]{
-            {BaseTestController.class, true, null},
-            {BaseTestController.class, false, c1},
-            {ControllerWithPredicate.class, false, c2},
-            {ControllerWithPredicate.class, true, c3}
+                {BaseTestController.class, true, null},
+                {BaseTestController.class, false, c1},
+                {ControllerWithPredicate.class, false, c2},
+                {ControllerWithPredicate.class, true, c3}
         };
     }
 
     @Test(dataProvider = "findWithPredicateDataProvider")
     public void testFindWithPredicate(Class<? extends BaseTestController> ctrlClass,
                                       boolean predicate,
-                                      Controller expected)
-    {
+                                      Controller expected) {
         var found = windowManager.find(ctrlClass, c -> ((BaseTestController) c).getFlag() == predicate);
         assertEquals(found.orElse(null), expected);
     }
