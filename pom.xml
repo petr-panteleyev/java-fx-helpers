@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.11.0</version>
+    <version>1.12.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,17 +39,17 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>18</maven.compiler.release>
+        <maven.compiler.release>19</maven.compiler.release>
         <!-- Plugins -->
-        <mavenCompilerPluginVersion>3.8.1</mavenCompilerPluginVersion>
-        <mavenJarPluginVersion>3.2.0</mavenJarPluginVersion>
-        <mavenSurefirePluginVersion>3.0.0-M5</mavenSurefirePluginVersion>
+        <mavenCompilerPluginVersion>3.10.1</mavenCompilerPluginVersion>
+        <mavenJarPluginVersion>3.3.0</mavenJarPluginVersion>
+        <mavenSurefirePluginVersion>3.0.0-M7</mavenSurefirePluginVersion>
         <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
         <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
         <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
         <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
         <!-- Dependencies -->
-        <javaFxVersion>18</javaFxVersion>
+        <javaFxVersion>19</javaFxVersion>
         <testNgVersion>7.5</testNgVersion>
     </properties>
 
@@ -98,7 +98,7 @@
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <author>false</author>
-                    <bottom><![CDATA[Copyright &copy; 2015, 2021, Petr Panteleyev]]></bottom>
+                    <bottom><![CDATA[Copyright &copy; 2015, 2022, Petr Panteleyev]]></bottom>
                     <additionalOptions>-html5 --release ${maven.compiler.release}</additionalOptions>
                     <show>protected</show>
                     <doclint>none</doclint>
@@ -120,11 +120,6 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <argLine>
-                        --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.embed=ALL-UNNAMED
-                    </argLine>
                 </configuration>
             </plugin>
             <plugin>

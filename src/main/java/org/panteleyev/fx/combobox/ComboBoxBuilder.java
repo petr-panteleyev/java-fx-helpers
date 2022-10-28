@@ -15,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.util.Callback;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -48,7 +49,7 @@ public class ComboBoxBuilder<T> {
      * @param <T>     type of items
      * @return {@link ComboBox} instance
      */
-    public static <T> ComboBox<T> comboBox(ObservableList<T> items, Consumer<ComboBoxBuilder<T>> builder) {
+    public static <T> ComboBox<T> comboBox(List<T> items, Consumer<ComboBoxBuilder<T>> builder) {
         Objects.requireNonNull(builder, "builder cannot be null");
 
         var b = new ComboBoxBuilder<T>(items);
@@ -75,8 +76,8 @@ public class ComboBoxBuilder<T> {
      * @param <T>   type of items
      * @return {@link ComboBox} instance
      */
-    public static <T> ComboBox<T> comboBox(ObservableList<T> items) {
-        return comboBox(FXCollections.observableArrayList(items), b -> {});
+    public static <T> ComboBox<T> comboBox(List<T> items) {
+        return comboBox(items, b -> {});
     }
 
     /**
@@ -87,11 +88,12 @@ public class ComboBoxBuilder<T> {
      * @return {@link ComboBox} instance
      */
     public static <T> ComboBox<T> comboBox(T[] items) {
-        return comboBox(FXCollections.observableArrayList(items), b -> {});
+        return comboBox(items, b -> {});
     }
 
-    private ComboBoxBuilder(ObservableList<T> items) {
-        this.items = items;
+    private ComboBoxBuilder(List<T> items) {
+        this.items = items instanceof ObservableList<T> observableList ?
+                observableList : FXCollections.observableArrayList(items);
     }
 
     /**
