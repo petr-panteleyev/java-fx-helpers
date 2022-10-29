@@ -15,6 +15,7 @@ import org.panteleyev.fx.ReadOnlyStringConverter;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * This class implements builder that creates instances of {@link ChoiceBox}. Builder configuration is done using
@@ -39,13 +40,30 @@ public class ChoiceBoxBuilder<T> {
     }
 
     /**
-     * Sets converter that represents item as string. Default value is {@link Object#toString()}.
+     * Sets converter that represents item as string.
      *
-     * @param stringConverter converter to string
+     * @param converter converter to string
      * @return <code>this</code>
      */
-    public ChoiceBoxBuilder<T> withStringConverter(ReadOnlyStringConverter<T> stringConverter) {
-        this.stringConverter = Objects.requireNonNull(stringConverter, "String converter cannot be null");
+    public ChoiceBoxBuilder<T> withStringConverter(ReadOnlyStringConverter<T> converter) {
+        this.stringConverter = Objects.requireNonNull(converter, "String converter cannot be null");
+        return this;
+    }
+
+    /**
+     * Sets converter that represents item as string.
+     *
+     * @param converter converter to string
+     * @return <code>this</code>
+     */
+    public ChoiceBoxBuilder<T> withStringConverter(Function<T, String> converter) {
+        Objects.requireNonNull(converter, "String converter cannot be null");
+        this.stringConverter = new ReadOnlyStringConverter<T>() {
+            @Override
+            public String toString(T object) {
+                return converter.apply(object);
+            }
+        };
         return this;
     }
 
