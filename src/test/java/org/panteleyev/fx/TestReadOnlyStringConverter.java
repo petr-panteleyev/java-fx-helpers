@@ -1,21 +1,24 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
-@Test
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestReadOnlyStringConverter {
 
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test
     public void testException() {
-        new ReadOnlyStringConverter<>() {
-            @Override
-            public String toString(Object o) {
-                return null;
-            }
-        }.fromString("abc");
+        assertThrows(UnsupportedOperationException.class,
+                () -> new ReadOnlyStringConverter<>() {
+                    @Override
+                    public String toString(Object o) {
+                        return null;
+                    }
+                }.fromString("abc")
+        );
     }
 }

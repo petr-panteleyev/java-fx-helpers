@@ -1,5 +1,5 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
@@ -8,14 +8,16 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.layout.BorderPane;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestWindowManager {
     static class BaseTestController extends Controller {
@@ -48,7 +50,7 @@ public class TestWindowManager {
     private static ControllerWithPredicate c2;
     private static ControllerWithPredicate c3;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() throws Exception {
         new JFXPanel();
 
@@ -75,44 +77,44 @@ public class TestWindowManager {
 
     @Test
     public void testControllerList() {
-        assertEquals(windowManager.getControllers(), List.of(c1, c2, c3));
+        assertEquals(List.of(c1, c2, c3), windowManager.getControllers());
     }
 
     @Test
     public void testControllerStream() {
-        assertEquals(windowManager.getControllerStream().toList(), List.of(c1, c2, c3));
+        assertEquals(List.of(c1, c2, c3), windowManager.getControllerStream().toList());
     }
 
-    @DataProvider
-    public Object[][] findDataProvider() {
-        return new Object[][]{
-                {BaseTestController.class, c1},
-                {ControllerWithPredicate.class, c2}
-        };
+    public static List<Arguments> findDataProvider() {
+        return List.of(
+                Arguments.of(BaseTestController.class, c1),
+                Arguments.of(ControllerWithPredicate.class, c2)
+        );
     }
 
-    @Test(dataProvider = "findDataProvider")
+    @ParameterizedTest
+    @MethodSource("findDataProvider")
     public void testFind(Class<? extends Controller> ctrlClass, Controller expected) {
         var found = windowManager.find(ctrlClass);
-        assertEquals(found.orElse(null), expected);
+        assertEquals(expected, found.orElse(null));
     }
 
 
-    @DataProvider
-    public Object[][] findWithPredicateDataProvider() {
-        return new Object[][]{
-                {BaseTestController.class, true, null},
-                {BaseTestController.class, false, c1},
-                {ControllerWithPredicate.class, false, c2},
-                {ControllerWithPredicate.class, true, c3}
-        };
+    public static List<Arguments> findWithPredicateDataProvider() {
+        return List.of(
+                Arguments.of(BaseTestController.class, true, null),
+                Arguments.of(BaseTestController.class, false, c1),
+                Arguments.of(ControllerWithPredicate.class, false, c2),
+                Arguments.of(ControllerWithPredicate.class, true, c3)
+        );
     }
 
-    @Test(dataProvider = "findWithPredicateDataProvider")
+    @ParameterizedTest
+    @MethodSource("findWithPredicateDataProvider")
     public void testFindWithPredicate(Class<? extends BaseTestController> ctrlClass,
                                       boolean predicate,
                                       Controller expected) {
         var found = windowManager.find(ctrlClass, c -> ((BaseTestController) c).getFlag() == predicate);
-        assertEquals(found.orElse(null), expected);
+        assertEquals(expected, found.orElse(null));
     }
 }

@@ -1,13 +1,16 @@
 /*
- Copyright © 2020 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
 import javafx.embed.swing.JFXPanel;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.panteleyev.fx.Constants.ACTION;
 import static org.panteleyev.fx.Constants.RB;
 import static org.panteleyev.fx.Constants.TEST_LABEL;
@@ -15,12 +18,9 @@ import static org.panteleyev.fx.Constants.TEST_STRING;
 import static org.panteleyev.fx.FxUtils.fxString;
 import static org.panteleyev.fx.MenuFactory.checkMenuItem;
 import static org.panteleyev.fx.MenuFactory.menuItem;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 public class TestMenuFactory {
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         new JFXPanel();
     }
@@ -28,22 +28,22 @@ public class TestMenuFactory {
     @Test
     public void testNewMenuItem() {
         var menuItem = menuItem(fxString(RB, TEST_LABEL), ACTION);
-        assertEquals(menuItem.getText(), TEST_STRING);
-        assertEquals(menuItem.getOnAction(), ACTION);
+        assertEquals(TEST_STRING, menuItem.getText());
+        assertEquals(ACTION, menuItem.getOnAction());
 
         var plainMenuItem = menuItem(TEST_LABEL, ACTION);
-        assertEquals(plainMenuItem.getText(), TEST_LABEL);
-        assertEquals(plainMenuItem.getOnAction(), ACTION);
+        assertEquals(TEST_LABEL, plainMenuItem.getText());
+        assertEquals(ACTION, plainMenuItem.getOnAction());
     }
 
     @Test
     public void testNewCheckMenuItem() {
         var selected = checkMenuItem(fxString(RB, TEST_LABEL), true);
-        assertEquals(selected.getText(), TEST_STRING);
+        assertEquals(TEST_STRING, selected.getText());
         assertTrue(selected.isSelected());
 
         var notSelected = checkMenuItem(fxString(RB, TEST_LABEL), false);
-        assertEquals(notSelected.getText(), TEST_STRING);
+        assertEquals(TEST_STRING, notSelected.getText());
         assertFalse(notSelected.isSelected());
     }
 }

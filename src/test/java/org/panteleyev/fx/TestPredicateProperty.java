@@ -1,18 +1,20 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.UUID;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestPredicateProperty {
 
@@ -29,23 +31,23 @@ public class TestPredicateProperty {
         assertFalse(prop.get().test(15));
     }
 
-    @DataProvider
-    public Object[][] orDataProvider() {
-        return new Object[][]{
-                {20, 30, 15, true},
-                {20, 30, 40, true},
-                {20, 30, 25, false},
-        };
+    public static List<Arguments> orDataProvider() {
+        return List.of(
+                Arguments.of(20, 30, 15, true),
+                Arguments.of(20, 30, 40, true),
+                Arguments.of(20, 30, 25, false)
+        );
     }
 
-    @Test(dataProvider = "orDataProvider")
-    public void testOr(int lower, int upper, int value, boolean result) {
+    @ParameterizedTest
+    @MethodSource("orDataProvider")
+    public void testOr(int lower, int upper, int value, boolean expected) {
         var p1 = new PredicateProperty<Integer>(x -> x < lower);
         var p2 = new PredicateProperty<Integer>(x -> x > upper);
 
         var prop = PredicateProperty.or(List.of(p1, p2));
 
-        assertEquals(prop.test(value), result);
+        assertEquals(expected, prop.test(value));
     }
 
     @Test

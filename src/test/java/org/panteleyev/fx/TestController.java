@@ -1,29 +1,30 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestController {
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         new JFXPanel();
     }
 
-    @Test(expectedExceptions = NullPointerException.class)
+    @Test
     public void testConstructorException() {
-        new Controller(null, null);
+        assertThrows(NullPointerException.class, () -> new Controller(null, null));
     }
 
     @Test

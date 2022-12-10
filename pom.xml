@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.12.1</version>
+    <version>1.12.2-SNAPSHOT</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -50,7 +50,7 @@
         <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
         <!-- Dependencies -->
         <javaFxVersion>19</javaFxVersion>
-        <testNgVersion>7.5</testNgVersion>
+        <jUnitVersion>5.9.1</jUnitVersion>
     </properties>
 
     <dependencies>
@@ -77,9 +77,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testNgVersion}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${jUnitVersion}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -116,11 +116,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${mavenSurefirePluginVersion}</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

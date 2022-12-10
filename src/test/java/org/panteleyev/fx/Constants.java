@@ -1,5 +1,5 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
@@ -9,10 +9,13 @@ import javafx.event.EventHandler;
 
 import java.util.ResourceBundle;
 
-interface Constants {
-    ResourceBundle RB = ResourceBundle.getBundle("test");
+final class Constants {
+    static final ResourceBundle RB = ResourceBundle.getBundle("test");
 
-    String TEST_LABEL = "test.label";
-    String TEST_STRING = "Test string";
-    EventHandler<ActionEvent> ACTION = x -> {};
+    static final String TEST_LABEL = "test.label";
+    static final String TEST_STRING = "Test string";
+    static final EventHandler<ActionEvent> ACTION = x -> {};
+
+    private Constants() {
+    }
 }

@@ -1,18 +1,19 @@
 /*
- Copyright © 2020 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.panteleyev.fx.FxUtils.SKIP;
 import static org.panteleyev.fx.grid.GridBuilder.gridCell;
 
 public class TestGridBuilder {
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test
     public void testGridCellException() {
-        gridCell(SKIP, 1, 1);
+        assertThrows(IllegalArgumentException.class, () -> gridCell(SKIP, 1, 1));
     }
 }

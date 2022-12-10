@@ -1,20 +1,20 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
 
 import javafx.embed.swing.JFXPanel;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.panteleyev.fx.FxFactory.textField;
-import static org.testng.Assert.assertEquals;
 
 public class TestFxFactory {
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         new JFXPanel();
     }
@@ -25,7 +25,7 @@ public class TestFxFactory {
         var prefColumnCount = 100;
 
         var textField = textField(initialValue, prefColumnCount);
-        assertEquals(textField.getText(), initialValue);
-        assertEquals(textField.getPrefColumnCount(), prefColumnCount);
+        assertEquals(initialValue, textField.getText());
+        assertEquals(prefColumnCount, textField.getPrefColumnCount());
     }
 }
