@@ -8,7 +8,7 @@ Helper classes and factories for JavaFX.
 
 ## Build
 
-Make sure ```JAVA_HOME``` points to JDK 17+.
+Make sure ```JAVA_HOME``` points to JDK 21+.
 
 Execute the following:
 

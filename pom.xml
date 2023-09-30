@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
+  Copyright © 2020-2023 Petr Panteleyev <petr@panteleyev.org>
   SPDX-License-Identifier: BSD-2-Clause
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.12.2-SNAPSHOT</version>
+    <version>1.13.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,18 +39,18 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <!-- Plugins -->
-        <mavenCompilerPluginVersion>3.10.1</mavenCompilerPluginVersion>
+        <mavenCompilerPluginVersion>3.11.0</mavenCompilerPluginVersion>
         <mavenJarPluginVersion>3.3.0</mavenJarPluginVersion>
-        <mavenSurefirePluginVersion>3.0.0-M7</mavenSurefirePluginVersion>
+        <mavenSurefirePluginVersion>3.0.0</mavenSurefirePluginVersion>
         <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
         <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
         <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
         <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
         <!-- Dependencies -->
-        <javaFxVersion>19</javaFxVersion>
-        <jUnitVersion>5.9.1</jUnitVersion>
+        <javaFxVersion>21</javaFxVersion>
+        <jUnitVersion>5.9.2</jUnitVersion>
     </properties>
 
     <dependencies>
@@ -98,7 +98,7 @@
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <author>false</author>
-                    <bottom><![CDATA[Copyright &copy; 2015, 2022, Petr Panteleyev]]></bottom>
+                    <bottom><![CDATA[Copyright &copy; 2015-2023, Petr Panteleyev]]></bottom>
                     <additionalOptions>-html5 --release ${maven.compiler.release}</additionalOptions>
                     <show>protected</show>
                     <doclint>none</doclint>
