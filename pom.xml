@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright © 2020-2023 Petr Panteleyev <petr@panteleyev.org>
+  Copyright © 2020-2024 Petr Panteleyev <petr@panteleyev.org>
   SPDX-License-Identifier: BSD-2-Clause
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.13.0</version>
+    <version>1.14.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -98,7 +98,7 @@
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <author>false</author>
-                    <bottom><![CDATA[Copyright &copy; 2015-2023, Petr Panteleyev]]></bottom>
+                    <bottom><![CDATA[Copyright &copy; 2015-2024, Petr Panteleyev]]></bottom>
                     <additionalOptions>-html5 --release ${maven.compiler.release}</additionalOptions>
                     <show>protected</show>
                     <doclint>none</doclint>
@@ -116,13 +116,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${mavenSurefirePluginVersion}</version>
-                <configuration>
-                    <argLine>
-                        --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.embed=ALL-UNNAMED
-                    </argLine>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
