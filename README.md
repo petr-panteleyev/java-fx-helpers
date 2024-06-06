@@ -3,15 +3,16 @@
 Helper classes and factories for JavaFX.
 
 [![GitHub](https://img.shields.io/github/license/petr-panteleyev/java-fx-helpers)](LICENSE)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.panteleyev/java-fx-helpers/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.panteleyev/java-fx-helpers/)
-[![Javadocs](http://www.javadoc.io/badge/org.panteleyev/java-fx-helpers.svg)](http://www.javadoc.io/doc/org.panteleyev/java-fx-helpers)
+[![Maven Central](https://img.shields.io/maven-central/v/org.panteleyev/java-fx-helpers
+)](https://maven-badges.herokuapp.com/maven-central/org.panteleyev/java-fx-helpers/)
+[![Javadocs](https://img.shields.io/maven-central/v/org.panteleyev/java-fx-helpers?label=javadoc&color=green
+)](http://github.panteleyev.org/java-fx-helpers)
 
 ## Build
 
-Make sure ```JAVA_HOME``` points to JDK 21+.
-
-Execute the following:
+* Set ```JAVA_HOME``` to JDK 17.
+* Execute:
 
 ```shell script
-$ mvn clean install
+$ ./mvnw clean install
 ```

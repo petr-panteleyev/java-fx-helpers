@@ -1,5 +1,5 @@
 /*
- Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2024 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
@@ -25,8 +25,21 @@ public final class FxFactory {
      * @param fieldSupplier text field supplier
      * @param valueCallback value callback
      * @return text field
+     * @deprecated use {@link #searchField(Supplier, Consumer)} instead
      */
+    @Deprecated(forRemoval = true)
     public static TextField newSearchField(Supplier<TextField> fieldSupplier, Consumer<String> valueCallback) {
+        return searchField(fieldSupplier, valueCallback);
+    }
+
+    /**
+     * Creates new search text field.
+     *
+     * @param fieldSupplier text field supplier
+     * @param valueCallback value callback
+     * @return text field
+     */
+    public static TextField searchField(Supplier<TextField> fieldSupplier, Consumer<String> valueCallback) {
         var searchField = fieldSupplier.get();
         searchField.setPrefColumnCount(20);
         searchField.textProperty().addListener((x, y, newValue) -> valueCallback.accept(newValue));
@@ -79,8 +92,9 @@ public final class FxFactory {
      * @param key       text key
      * @param closeable closeable flag
      * @return tab
+     * @deprecated use {@link TabFactory#tab(String, boolean, Node)}
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public static Tab newTab(ResourceBundle rb, String key, boolean closeable) {
         var tab = new Tab(rb.getString(key));
         tab.setClosable(closeable);
@@ -95,8 +109,9 @@ public final class FxFactory {
      * @param closeable closeable flag
      * @param node      tab content
      * @return tab
+     * @deprecated use {@link TabFactory#tab(String, boolean, Node)}
      */
-    @Deprecated
+    @Deprecated(forRemoval = true)
     public static Tab newTab(ResourceBundle rb, String key, boolean closeable, Node node) {
         var tab = new Tab(rb.getString(key), node);
         tab.setClosable(closeable);

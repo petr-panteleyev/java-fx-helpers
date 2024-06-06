@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.14.0</version>
+    <version>1.15.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,18 +39,18 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <!-- Plugins -->
-        <mavenCompilerPluginVersion>3.11.0</mavenCompilerPluginVersion>
-        <mavenJarPluginVersion>3.3.0</mavenJarPluginVersion>
-        <mavenSurefirePluginVersion>3.0.0</mavenSurefirePluginVersion>
-        <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
-        <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
-        <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
-        <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
+        <mavenCompilerPluginVersion>3.13.0</mavenCompilerPluginVersion>
+        <mavenJarPluginVersion>3.4.1</mavenJarPluginVersion>
+        <mavenSurefirePluginVersion>3.2.5</mavenSurefirePluginVersion>
+        <mavenJavadocPluginVersion>3.7.0</mavenJavadocPluginVersion>
+        <mavenSourcePluginVersion>3.3.1</mavenSourcePluginVersion>
+        <mavenGpgPluginVersion>3.2.4</mavenGpgPluginVersion>
+        <nexusStagingMavenPlugin>1.7.0</nexusStagingMavenPlugin>
         <!-- Dependencies -->
-        <javaFxVersion>21</javaFxVersion>
-        <jUnitVersion>5.9.2</jUnitVersion>
+        <javaFxVersion>22.0.1</javaFxVersion>
+        <jUnitVersion>5.10.2</jUnitVersion>
     </properties>
 
     <dependencies>
@@ -93,6 +93,11 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${mavenJarPluginVersion}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${mavenJavadocPluginVersion}</version>
                 <configuration>
@@ -116,6 +121,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${mavenSurefirePluginVersion}</version>
+                <configuration>
+                    <argLine>
+                        --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-exports javafx.graphics/com.sun.javafx.embed=ALL-UNNAMED
+                    </argLine>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

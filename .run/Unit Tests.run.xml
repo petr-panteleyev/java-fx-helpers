@@ -1,0 +1,16 @@
+<!--
+  Copyright © 2024 Petr Panteleyev <petr@panteleyev.org>
+  SPDX-License-Identifier: BSD-2-Clause
+  -->
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Unit Tests" type="JUnit" factoryName="JUnit">
+    <module name="java-fx-helpers" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="directory" />
+    <dir value="$PROJECT_DIR$/src/test/java/org/panteleyev/fx" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

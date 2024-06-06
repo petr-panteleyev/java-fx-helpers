@@ -1,5 +1,5 @@
 /*
- Copyright © 2020-2022 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2024 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
@@ -13,6 +13,9 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * This class provides convenience methods to create menus, menu items, etc.
@@ -215,13 +218,26 @@ public final class MenuFactory {
      * @param text  menu text
      * @param items menu items
      * @return menu
+     * @deprecated use {@link #menu(String, MenuItem...)} instead
      */
+    @Deprecated(forRemoval = true)
     public static Menu newMenu(String text, MenuItem... items) {
         return new Menu(text, null, items);
     }
 
     /**
-     * Creates new menu.
+     * Creates new menu. Null items are ignored which allows to create menu items optionally.
+     *
+     * @param text  menu text
+     * @param items menu items
+     * @return menu
+     */
+    public static Menu menu(String text, MenuItem... items) {
+        return menu(text, null, items);
+    }
+
+    /**
+     * Creates new menu. Null items are ignored which allows to create menu items optionally.
      *
      * @param text  menu text
      * @param node  menu image node
@@ -229,7 +245,10 @@ public final class MenuFactory {
      * @return menu
      */
     public static Menu menu(String text, Node node, MenuItem... items) {
-        return new Menu(text, node, items);
+        var filtered = Arrays.stream(items)
+                .filter(Objects::nonNull)
+                .toArray(MenuItem[]::new);
+        return new Menu(text, node, filtered);
     }
 
     /**
