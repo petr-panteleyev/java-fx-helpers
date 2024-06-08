@@ -41,6 +41,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
         <!-- Plugins -->
+        <mavenToolchainsPluginVersion>3.2.0</mavenToolchainsPluginVersion>
         <mavenCompilerPluginVersion>3.13.0</mavenCompilerPluginVersion>
         <mavenJarPluginVersion>3.4.1</mavenJarPluginVersion>
         <mavenSurefirePluginVersion>3.2.5</mavenSurefirePluginVersion>
@@ -86,6 +87,25 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-toolchains-plugin</artifactId>
+                <version>${mavenToolchainsPluginVersion}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>toolchain</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <toolchains>
+                        <jdk>
+                            <version>${maven.compiler.release}</version>
+                        </jdk>
+                    </toolchains>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
