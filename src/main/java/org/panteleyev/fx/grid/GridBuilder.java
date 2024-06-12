@@ -184,7 +184,9 @@ public class GridBuilder {
      *
      * @param hGrow horizontal grow priority
      * @return column constraints
+     * @deprecated use {@link ColumnConstraintsBuilder} instead
      */
+    @Deprecated(forRemoval = true)
     public static ColumnConstraints columnConstraints(Priority hGrow) {
         var constraints = new ColumnConstraints();
         constraints.setHgrow(hGrow);
