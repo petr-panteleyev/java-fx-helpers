@@ -1,11 +1,11 @@
 # JavaFX Helpers
 
 [![JDK](https://img.shields.io/badge/Java-JDK--17%2B-orange)](https://jdk.java.net/archive/)
-[![GitHub](https://img.shields.io/github/license/petr-panteleyev/java-fx-helpers)](LICENSE)
+[![GitHub License](https://img.shields.io/github/license/petr-panteleyev/java-fx-helpers?label=License&color=orange)
+](LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/org.panteleyev/java-fx-helpers
 )](https://search.maven.org/artifact/org.panteleyev/java-fx-helpers)
-[![Static Badge](https://img.shields.io/badge/Javadoc-blue)
-](http://github.panteleyev.org/java-fx-helpers)
+[![javadoc](https://javadoc.io/badge2/org.panteleyev/java-fx-helpers/javadoc.svg)](https://javadoc.io/doc/org.panteleyev/java-fx-helpers)
 
 Helper classes and factories for JavaFX.
 

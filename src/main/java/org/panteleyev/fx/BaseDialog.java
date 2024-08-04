@@ -42,7 +42,17 @@ public class BaseDialog<R> extends Dialog<R> {
      *
      * @param cssUrl style sheet url
      */
+    @Deprecated(forRemoval = true)
     public BaseDialog(URL cssUrl) {
+        this(null, cssUrl);
+    }
+
+    /**
+     * Creates dialog instance with no owner and specified style sheet.
+     *
+     * @param cssUrl style sheet url
+     */
+    public BaseDialog(String cssUrl) {
         this(null, cssUrl);
     }
 
@@ -52,10 +62,24 @@ public class BaseDialog<R> extends Dialog<R> {
      * @param owner  owner
      * @param cssUrl stye sheet url
      */
+    @Deprecated(forRemoval = true)
     public BaseDialog(Controller owner, URL cssUrl) {
         this(owner);
         if (cssUrl != null) {
             getDialogPane().getStylesheets().add(cssUrl.toString());
+        }
+    }
+
+    /**
+     * Creates dialog instance with specified owner and style sheet.
+     *
+     * @param owner  owner
+     * @param cssUrl style sheet url
+     */
+    public BaseDialog(Controller owner, String cssUrl) {
+        this(owner);
+        if (cssUrl != null) {
+            getDialogPane().getStylesheets().add(cssUrl);
         }
     }
 

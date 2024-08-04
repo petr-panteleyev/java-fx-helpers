@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"org.panteleyev.fx","l":"org.panteleyev.fx"},{"m":"org.panteleyev.fx","l":"org.panteleyev.fx.choicebox"},{"m":"org.panteleyev.fx","l":"org.panteleyev.fx.combobox"},{"m":"org.panteleyev.fx","l":"org.panteleyev.fx.grid"}];updateSearchResults();
