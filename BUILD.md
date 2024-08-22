@@ -1,18 +1,18 @@
 # Build
 
-This library can be built with JDK 17 and newer.
+This library can be built with JDK 21 and newer.
 
-* Set ```JAVA_HOME``` to JDK 17+
+* Set ```JAVA_HOME``` to JDK 21+
 * Setup Maven toolchain:
 
 ```xml    
 <toolchain>
     <type>jdk</type>
     <provides>
-        <version>17</version>
+        <version>21</version>
     </provides>
     <configuration>
-        <jdkHome>/path/to/jdk-17</jdkHome>
+        <jdkHome>/path/to/jdk-21</jdkHome>
     </configuration>
 </toolchain>
 ```

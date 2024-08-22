@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.17.0</version>
+    <version>1.18.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,7 +39,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <!-- Plugins -->
         <mavenToolchainsPluginVersion>3.2.0</mavenToolchainsPluginVersion>
         <mavenCompilerPluginVersion>3.13.0</mavenCompilerPluginVersion>

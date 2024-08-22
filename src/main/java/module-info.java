@@ -14,4 +14,5 @@ module org.panteleyev.fx {
     exports org.panteleyev.fx.combobox;
     exports org.panteleyev.fx.grid;
     exports org.panteleyev.fx.choicebox;
+    exports org.panteleyev.fx.dialogs;
 }
