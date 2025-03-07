@@ -17,6 +17,10 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCombination;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This class implements the concept of UI action. The purpose is to uniformly create multiple UI controls for the same
  * event handler, text, accelerator, etc.
@@ -30,7 +34,16 @@ public final class FxAction {
     private final BooleanProperty selectedProperty = new SimpleBooleanProperty(false);
     private final BooleanProperty visibleProperty = new SimpleBooleanProperty(true);
 
+    private final List<WeakReference<CheckMenuItem>> checkMenuItemList = new ArrayList<>();
+
     private FxAction() {
+        selectedProperty.addListener((observableValue, oldValue, newValue) -> {
+            oldValue = oldValue != null && oldValue;
+            newValue = newValue != null && newValue;
+            if (newValue != oldValue) {
+                onSelectedPropertyChanged(oldValue, newValue);
+            }
+        });
     }
 
     /**
@@ -269,8 +282,11 @@ public final class FxAction {
         checkMenuItem.acceleratorProperty().bind(acceleratorProperty);
         checkMenuItem.disableProperty().bind(disableProperty);
         checkMenuItem.onActionProperty().bind(onActionProperty);
-        checkMenuItem.selectedProperty().bind(selectedProperty);
         checkMenuItem.visibleProperty().bind(visibleProperty);
+
+        synchronized (checkMenuItemList) {
+            checkMenuItemList.add(new WeakReference<>(checkMenuItem));
+        }
         return checkMenuItem;
     }
 
@@ -286,5 +302,18 @@ public final class FxAction {
         button.onActionProperty().bind(onActionProperty);
         button.visibleProperty().bind(visibleProperty);
         return button;
+    }
+
+    private void onSelectedPropertyChanged(boolean oldValue, boolean newValue) {
+        synchronized (checkMenuItemList) {
+            for (var iter = checkMenuItemList.iterator(); iter.hasNext(); ) {
+                var checkMenuItem = iter.next().get();
+                if (checkMenuItem == null) {
+                    iter.remove();
+                } else {
+                    checkMenuItem.setSelected(newValue);
+                }
+            }
+        }
     }
 }
