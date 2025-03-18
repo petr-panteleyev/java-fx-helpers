@@ -9,3 +9,5 @@ target/
 *.iml
 *.ipr
 out/
+
+nb-configuration.xml

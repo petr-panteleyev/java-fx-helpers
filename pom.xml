@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.19.1</version>
+    <version>1.20.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -39,7 +39,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>24</maven.compiler.release>
         <!-- Plugins -->
         <mavenToolchainsPluginVersion>3.2.0</mavenToolchainsPluginVersion>
         <mavenCompilerPluginVersion>3.14.0</mavenCompilerPluginVersion>
@@ -50,8 +50,8 @@
         <mavenGpgPluginVersion>3.2.7</mavenGpgPluginVersion>
         <nexusStagingMavenPlugin>1.7.0</nexusStagingMavenPlugin>
         <!-- Dependencies -->
-        <javaFxVersion>23.0.2</javaFxVersion>
-        <jUnitVersion>5.11.3</jUnitVersion>
+        <javaFxVersion>24</javaFxVersion>
+        <jUnitVersion>5.12.1</jUnitVersion>
     </properties>
 
     <dependencies>
@@ -143,9 +143,7 @@
                 <version>${mavenSurefirePluginVersion}</version>
                 <configuration>
                     <argLine>
-                        --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.embed=ALL-UNNAMED
+                        --enable-native-access=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>

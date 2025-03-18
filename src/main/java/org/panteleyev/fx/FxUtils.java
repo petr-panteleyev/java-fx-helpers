@@ -1,5 +1,5 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2025 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
@@ -8,6 +8,7 @@ import javafx.scene.Node;
 
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import javafx.scene.Parent;
 
 /**
  * This class provides common utility methods.
@@ -22,7 +23,7 @@ public final class FxUtils {
     /**
      * Special node that represents empty cell or nothing depending on API.
      */
-    public static final Node SKIP = new Node() {
+    public static final Node SKIP = new Parent() {
     };
 
     /**
