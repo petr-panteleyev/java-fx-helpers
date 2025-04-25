@@ -1,5 +1,5 @@
 /*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
+ Copyright © 2020-2025 Petr Panteleyev <petr@panteleyev.org>
  SPDX-License-Identifier: BSD-2-Clause
  */
 package org.panteleyev.fx;
@@ -86,6 +86,29 @@ public class Controller {
      * Actions performed on Hiding event.
      */
     protected void onWindowHiding() {
+    }
+
+    /**
+     * Returns position of the controller stage.
+     *
+     * @return stage position
+     */
+    public StagePosition getStagePosition() {
+        return new StagePosition(stage.getX(), stage.getY());
+    }
+
+    /**
+     * Sets position of the controller stage.
+     *
+     * @param position stage position. Ignored if {@code null}.
+     */
+    public void setStagePosition(StagePosition position) {
+        if (position == null) {
+            return;
+        }
+
+        stage.setX(position.x());
+        stage.setY(position.y());
     }
 
     /**
