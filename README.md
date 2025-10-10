@@ -12,7 +12,7 @@ The goal is to provide somewhat more convenient way of working with Java FX cont
 <dependency>
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.22.0</version>
+    <version>1.22.1</version>
 </dependency>
 ```
 

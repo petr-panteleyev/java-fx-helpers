@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.stage.Window;
 
 import java.net.URL;
 import java.util.Optional;
@@ -81,6 +82,14 @@ public class BaseDialog<R> extends Dialog<R> {
         if (cssUrl != null) {
             getDialogPane().getStylesheets().add(cssUrl);
         }
+    }
+
+    /**
+     * Centers dialog on screen via {@link Window#centerOnScreen()}.
+     * May be useful on Linux.
+     */
+    public void centerOnScreen() {
+        getDialogPane().getScene().getWindow().centerOnScreen();
     }
 
     /**
