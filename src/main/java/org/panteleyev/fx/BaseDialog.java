@@ -1,7 +1,5 @@
-/*
- Copyright © 2020-2021 Petr Panteleyev <petr@panteleyev.org>
- SPDX-License-Identifier: BSD-2-Clause
- */
+// Copyright © 2020-2025 Petr Panteleyev
+// SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -10,12 +8,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.stage.Window;
 
-import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
- * Base class for dialogs.
+ * Implements base class for dialogs.
  *
  * @param <R> The return type of the dialog, via the result property.
  */
@@ -43,32 +40,8 @@ public class BaseDialog<R> extends Dialog<R> {
      *
      * @param cssUrl style sheet url
      */
-    @Deprecated(forRemoval = true)
-    public BaseDialog(URL cssUrl) {
-        this(null, cssUrl);
-    }
-
-    /**
-     * Creates dialog instance with no owner and specified style sheet.
-     *
-     * @param cssUrl style sheet url
-     */
     public BaseDialog(String cssUrl) {
         this(null, cssUrl);
-    }
-
-    /**
-     * Creates dialog instance with specified owner and style sheet.
-     *
-     * @param owner  owner
-     * @param cssUrl stye sheet url
-     */
-    @Deprecated(forRemoval = true)
-    public BaseDialog(Controller owner, URL cssUrl) {
-        this(owner);
-        if (cssUrl != null) {
-            getDialogPane().getStylesheets().add(cssUrl.toString());
-        }
     }
 
     /**
@@ -85,16 +58,15 @@ public class BaseDialog<R> extends Dialog<R> {
     }
 
     /**
-     * Centers dialog on screen via {@link Window#centerOnScreen()}.
-     * May be useful on Linux.
+     * Centers dialog on screen via {@link Window#centerOnScreen()}. May be useful on Linux.
      */
     public void centerOnScreen() {
         getDialogPane().getScene().getWindow().centerOnScreen();
     }
 
     /**
-     * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel"
-     * resource for Cancel translation.
+     * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel" resource for Cancel
+     * translation.
      *
      * @param rb resource bundle
      */
@@ -103,8 +75,8 @@ public class BaseDialog<R> extends Dialog<R> {
     }
 
     /**
-     * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel"
-     * resource for Cancel translation.
+     * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel" resource for Cancel
+     * translation.
      *
      * @param rb                        resource bundle
      * @param validationInvalidProperty invalid property for validation support

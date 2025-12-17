@@ -8,12 +8,15 @@ Helper classes and factories for JavaFX.
 
 The goal is to provide somewhat more convenient way of working with Java FX controls API.
 
+## Artifact
+
 ```xml
 <dependency>
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.22.1</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
-[API Documentation](https://www.panteleyev.org/javadoc/java-fx-helpers/)
+* [API Documentation](https://www.panteleyev.org/javadoc/java-fx-helpers/)
+* [Java Functional Extensions](https://www.panteleyev.org/javadoc/java-functional/)

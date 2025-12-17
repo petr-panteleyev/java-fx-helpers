@@ -1,7 +1,5 @@
-/*
- Copyright © 2025 Petr Panteleyev <petr@panteleyev.org>
- SPDX-License-Identifier: BSD-2-Clause
- */
+// Copyright © 2025 Petr Panteleyev
+// SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
 import javafx.beans.property.BooleanProperty;
@@ -21,23 +19,31 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.panteleyev.functional.Scope.apply;
+
 /**
  * This class implements the concept of UI action. The purpose is to uniformly create multiple UI controls for the same
  * event handler, text, accelerator, etc.
+ * <p>
+ * <strong>Example:</strong>
+ * {@snippet lang = java:
+ * var action = fxAction("Open...")
+ *     .onAction(this::onOpen)
+ *     .accelerator(new KeyCodeCombination(KeyCode.O, SHORTCUT_DOWN));
+ *}
  */
 public final class FxAction {
     private final StringProperty textProperty = new SimpleStringProperty("");
     private final ObjectProperty<KeyCombination> acceleratorProperty = new SimpleObjectProperty<>(null);
     private final BooleanProperty disableProperty = new SimpleBooleanProperty(false);
-    private final ObjectProperty<EventHandler<ActionEvent>> onActionProperty = new SimpleObjectProperty<>(
-            actionEvent -> {});
+    private final ObjectProperty<EventHandler<ActionEvent>> onActionProperty = new SimpleObjectProperty<>(_ -> {});
     private final BooleanProperty selectedProperty = new SimpleBooleanProperty(false);
     private final BooleanProperty visibleProperty = new SimpleBooleanProperty(true);
 
     private final List<WeakReference<CheckMenuItem>> checkMenuItemList = new ArrayList<>();
 
     private FxAction() {
-        selectedProperty.addListener((observableValue, oldValue, newValue) -> {
+        selectedProperty.addListener((_, oldValue, newValue) -> {
             oldValue = oldValue != null && oldValue;
             newValue = newValue != null && newValue;
             if (newValue != oldValue) {
@@ -46,9 +52,14 @@ public final class FxAction {
         });
     }
 
+    private FxAction(String text) {
+        this();
+        textProperty.set(text);
+    }
+
     /**
-     * Returns action text property. Updating this property will update same property of all related controls.
-     * Default value is an empty string.
+     * Returns action text property. Updating this property will update same property of all related controls. Default
+     * value is an empty string.
      *
      * @return action text property
      */
@@ -62,7 +73,7 @@ public final class FxAction {
      * @param text new text value
      * @return this action
      */
-    public FxAction setText(String text) {
+    public FxAction text(String text) {
         textProperty.set(text);
         return this;
     }
@@ -83,7 +94,7 @@ public final class FxAction {
      * @param accelerator new accelerator value
      * @return this action
      */
-    public FxAction setAccelerator(KeyCombination accelerator) {
+    public FxAction accelerator(KeyCombination accelerator) {
         acceleratorProperty.set(accelerator);
         return this;
     }
@@ -104,7 +115,7 @@ public final class FxAction {
      * @param disable new disable value
      * @return this action
      */
-    public FxAction setDisable(boolean disable) {
+    public FxAction disable(boolean disable) {
         disableProperty.set(disable);
         return this;
     }
@@ -125,7 +136,7 @@ public final class FxAction {
      * @param onAction new onAction value
      * @return this action
      */
-    public FxAction setOnAction(EventHandler<ActionEvent> onAction) {
+    public FxAction onAction(EventHandler<ActionEvent> onAction) {
         onActionProperty.set(onAction);
         return this;
     }
@@ -146,7 +157,7 @@ public final class FxAction {
      * @param selected new selected value
      * @return this action
      */
-    public FxAction setSelected(boolean selected) {
+    public FxAction selected(boolean selected) {
         selectedProperty.set(selected);
         return this;
     }
@@ -167,7 +178,7 @@ public final class FxAction {
      * @param visible new visible value
      * @return this action
      */
-    public FxAction setVisible(boolean visible) {
+    public FxAction visible(boolean visible) {
         visibleProperty.set(visible);
         return this;
     }
@@ -175,85 +186,20 @@ public final class FxAction {
     /**
      * Creates new instance of {@link FxAction}.
      *
-     * @param text         text
-     * @param eventHandler event handler
      * @return action
      */
-    public static FxAction create(String text, EventHandler<ActionEvent> eventHandler) {
-        var action = new FxAction();
-        action.textProperty().set(text);
-        action.onActionProperty().set(eventHandler);
-        return action;
+    public static FxAction fxAction() {
+        return new FxAction();
     }
 
     /**
      * Creates new instance of {@link FxAction}.
      *
-     * @param text         text
-     * @param eventHandler event handler
-     * @param accelerator  accelerator
+     * @param text text
      * @return action
      */
-    public static FxAction create(String text, EventHandler<ActionEvent> eventHandler, KeyCombination accelerator) {
-        var action = new FxAction();
-        action.textProperty().set(text);
-        action.acceleratorProperty().set(accelerator);
-        action.onActionProperty().set(eventHandler);
-        return action;
-    }
-
-    /**
-     * Creates new instance of {@link FxAction}.
-     *
-     * @param text         text
-     * @param eventHandler event handler
-     * @param disable      disable
-     * @return action
-     */
-    public static FxAction create(String text, EventHandler<ActionEvent> eventHandler, boolean disable) {
-        var action = new FxAction();
-        action.textProperty().set(text);
-        action.onActionProperty().set(eventHandler);
-        action.disableProperty().set(disable);
-        return action;
-    }
-
-    /**
-     * Creates new instance of {@link FxAction}.
-     *
-     * @param text            text
-     * @param eventHandler    event handler
-     * @param accelerator     accelerator
-     * @param disableProperty disable property binding
-     * @return action
-     */
-    public static FxAction create(String text, EventHandler<ActionEvent> eventHandler, KeyCombination accelerator,
-            BooleanProperty disableProperty) {
-        var action = new FxAction();
-        action.textProperty().set(text);
-        action.acceleratorProperty().set(accelerator);
-        action.onActionProperty().set(eventHandler);
-        action.disableProperty().bind(disableProperty);
-        return action;
-    }
-
-    /**
-     * Creates new instance of {@link FxAction}.
-     *
-     * @param text         text
-     * @param eventHandler event handler
-     * @param accelerator  accelerator
-     * @param disable      disable
-     * @return action
-     */
-    public static FxAction create(String text, EventHandler<ActionEvent> eventHandler, KeyCombination accelerator,
-            boolean disable) {
-        var action = new FxAction();
-        action.textProperty().set(text);
-        action.acceleratorProperty().set(accelerator);
-        action.onActionProperty().set(eventHandler);
-        action.disableProperty().set(disable);
-        return action;
+    public static FxAction fxAction(String text) {
+        return new FxAction(text);
     }
 
     /**
@@ -262,13 +208,13 @@ public final class FxAction {
      * @return menu item
      */
     public MenuItem createMenuItem() {
-        var menuItem = new MenuItem();
-        menuItem.textProperty().bind(textProperty);
-        menuItem.acceleratorProperty().bind(acceleratorProperty);
-        menuItem.disableProperty().bind(disableProperty);
-        menuItem.onActionProperty().bind(onActionProperty);
-        menuItem.visibleProperty().bind(visibleProperty);
-        return menuItem;
+        return apply(new MenuItem(), menuItem -> {
+            menuItem.textProperty().bind(textProperty);
+            menuItem.acceleratorProperty().bind(acceleratorProperty);
+            menuItem.disableProperty().bind(disableProperty);
+            menuItem.onActionProperty().bind(onActionProperty);
+            menuItem.visibleProperty().bind(visibleProperty);
+        });
     }
 
     /**
@@ -277,12 +223,13 @@ public final class FxAction {
      * @return check menu item
      */
     public CheckMenuItem createCheckMenuItem() {
-        var checkMenuItem = new CheckMenuItem();
-        checkMenuItem.textProperty().bind(textProperty);
-        checkMenuItem.acceleratorProperty().bind(acceleratorProperty);
-        checkMenuItem.disableProperty().bind(disableProperty);
-        checkMenuItem.onActionProperty().bind(onActionProperty);
-        checkMenuItem.visibleProperty().bind(visibleProperty);
+        var checkMenuItem = apply(new CheckMenuItem(), item -> {
+            item.textProperty().bind(textProperty);
+            item.acceleratorProperty().bind(acceleratorProperty);
+            item.disableProperty().bind(disableProperty);
+            item.onActionProperty().bind(onActionProperty);
+            item.visibleProperty().bind(visibleProperty);
+        });
 
         synchronized (checkMenuItemList) {
             checkMenuItemList.add(new WeakReference<>(checkMenuItem));
@@ -296,12 +243,12 @@ public final class FxAction {
      * @return button
      */
     public Button createButton() {
-        var button = new Button();
-        button.textProperty().bind(textProperty);
-        button.disableProperty().bind(disableProperty);
-        button.onActionProperty().bind(onActionProperty);
-        button.visibleProperty().bind(visibleProperty);
-        return button;
+        return apply(new Button(), button -> {
+            button.textProperty().bind(textProperty);
+            button.disableProperty().bind(disableProperty);
+            button.onActionProperty().bind(onActionProperty);
+            button.visibleProperty().bind(visibleProperty);
+        });
     }
 
     private void onSelectedPropertyChanged(boolean oldValue, boolean newValue) {

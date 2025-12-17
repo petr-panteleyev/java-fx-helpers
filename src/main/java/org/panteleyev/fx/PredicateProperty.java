@@ -1,7 +1,5 @@
-/*
- Copyright © 2020 Petr Panteleyev <petr@panteleyev.org>
- SPDX-License-Identifier: BSD-2-Clause
- */
+// Copyright © 2020-2025 Petr Panteleyev
+// SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,8 +15,8 @@ import java.util.function.Predicate;
 /**
  * This class implements property that wraps {@link Predicate} instance.
  * <p>
- * Default value is <code>x -&gt; true</code> i.e. {@link PredicateProperty#test(Object)} will return
- * true until the predicate is altered via {@link PredicateProperty#set(Predicate)}.
+ * Default value is {@code true} i.e. {@link PredicateProperty#test(Object)} will return {@code true} until the
+ * predicate is altered via {@link PredicateProperty#set(Predicate)}.
  *
  * @param <T> the type of the input to the predicate
  */

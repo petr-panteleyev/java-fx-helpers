@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>1.22.1</version>
+    <version>2.0.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -43,15 +43,16 @@
         <!-- Plugins -->
         <mavenToolchainsPluginVersion>3.2.0</mavenToolchainsPluginVersion>
         <mavenCompilerPluginVersion>3.14.1</mavenCompilerPluginVersion>
-        <mavenJarPluginVersion>3.4.2</mavenJarPluginVersion>
+        <mavenJarPluginVersion>3.5.0</mavenJarPluginVersion>
         <mavenSurefirePluginVersion>3.5.4</mavenSurefirePluginVersion>
-        <mavenJavadocPluginVersion>3.11.3</mavenJavadocPluginVersion>
-        <mavenSourcePluginVersion>3.3.1</mavenSourcePluginVersion>
-        <mavenGpgPluginVersion>3.2.7</mavenGpgPluginVersion>
-        <nexusStagingMavenPlugin>0.7.0</nexusStagingMavenPlugin>
+        <mavenJavadocPluginVersion>3.12.0</mavenJavadocPluginVersion>
+        <mavenSourcePluginVersion>3.4.0</mavenSourcePluginVersion>
+        <mavenGpgPluginVersion>3.2.8</mavenGpgPluginVersion>
+        <nexusStagingMavenPlugin>0.9.0</nexusStagingMavenPlugin>
         <!-- Dependencies -->
-        <javaFxVersion>25</javaFxVersion>
-        <jUnitVersion>5.13.1</jUnitVersion>
+        <orgPanteleyevFunctionalVersion>1.1.0</orgPanteleyevFunctionalVersion>
+        <javaFxVersion>25.0.1</javaFxVersion>
+        <jUnitVersion>6.0.0</jUnitVersion>
     </properties>
 
     <dependencies>
@@ -69,6 +70,11 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javaFxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>org-panteleyev-functional</artifactId>
+            <version>${orgPanteleyevFunctionalVersion}</version>
         </dependency>
         <!-- Test -->
         <dependency>
@@ -123,8 +129,10 @@
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <author>false</author>
-                    <bottom><![CDATA[Copyright &copy; 2015-2025, Petr Panteleyev]]></bottom>
-                    <additionalOptions>--release ${maven.compiler.release}</additionalOptions>
+                    <bottom><![CDATA[Copyright &copy; 2020-2025, Petr Panteleyev]]></bottom>
+                    <additionalOptions>
+                        <additionalOption>--release ${maven.compiler.release}</additionalOption>
+                    </additionalOptions>
                     <show>protected</show>
                     <doclint>none</doclint>
                     <disableNoFonts>true</disableNoFonts>

@@ -1,9 +1,8 @@
-/*
- Copyright © 2020-2025 Petr Panteleyev <petr@panteleyev.org>
- SPDX-License-Identifier: BSD-2-Clause
- */
+// Copyright © 2020-2025 Petr Panteleyev
+// SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,9 +10,15 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 /**
- * Base class for UI controller.
+ * Implements base class for UI controller.
  */
 public class Controller {
+    /**
+     * Special node that represents empty cell or nothing depending on API.
+     */
+    public static final Node SKIP = new Parent() {
+    };
+
     private final Stage stage;
     private final String css;
 
@@ -22,7 +27,7 @@ public class Controller {
      *
      * @param stage stage, cannot be null
      * @param css   optional css resource path
-     * @throws NullPointerException if stage is null
+     * @throws NullPointerException if {@code stage} is {@code null}
      */
     public Controller(Stage stage, String css) {
         this.stage = Objects.requireNonNull(stage);
@@ -48,6 +53,11 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Returns title of the controller window.
+     *
+     * @return title
+     */
     public String getTitle() {
         return "";
     }
@@ -64,8 +74,7 @@ public class Controller {
     /**
      * Configures stage for given root node.
      * <p>
-     * Controller reference is stored in the {@link Scene scene} object using
-     * {@link Scene#setUserData(Object)} method.
+     * Controller reference is stored in the {@link Scene} object using {@link Scene#setUserData(Object)} method.
      *
      * @param root root node
      */
