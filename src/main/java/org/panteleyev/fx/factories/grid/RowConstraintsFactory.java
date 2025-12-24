@@ -5,7 +5,7 @@ package org.panteleyev.fx.factories.grid;
 import javafx.scene.layout.RowConstraints;
 
 /**
- * This class implements factory methods for {@link RowConstraints}.
+ * Provides factory methods to create instances of {@link RowConstraints}.
  * <p>
  * <strong>Example:</strong>
  * {@snippet :

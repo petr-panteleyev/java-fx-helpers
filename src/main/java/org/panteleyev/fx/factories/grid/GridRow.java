@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Utility class that holds grid row attributes.
+ * Holds grid row attributes.
  */
 public class GridRow {
     private final List<Node> nodes;

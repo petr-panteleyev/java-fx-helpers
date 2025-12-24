@@ -7,18 +7,18 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.function.Consumer;
 
 import static org.panteleyev.fx.Controller.SKIP;
 
 /**
- * This class implements factory methods for {@link GridPane}.
+ * Provides factory methods to create instances of {@link GridPane}.
  * <p>
  * Configuration is done by rows. If some node requires column or/and row span configured then
  * {@link GridCell#gridCell(Node, int, int)} must be used instead of node itself.
  * <p>
- * Additional configuration for the grid pane can be done by passing {@code Consumer<GridBuilder>} to the appropriate
- * {@link GridPaneFactory} methods.
+ * Additional configuration for the grid pane can be done using
+ * {@link org.panteleyev.functional.Scope#apply(Object, Consumer)}.
  * <p>
  * <strong>Example:</strong>
  * <p>
@@ -45,35 +45,47 @@ public final class GridPaneFactory {
     /**
      * Creates instance of {@link GridPane} with the specified rows.
      *
-     * @param rows grid rows
+     * @param rows grid rows, ignored if {@code null}
      * @return {@link GridPane} instance
-     * @throws NullPointerException if {@code rows} is {@code null}
      */
     public static GridPane gridPane(List<GridRow> rows) {
-        return build(
-                Objects.requireNonNull(rows, "Rows cannot be null"),
-                List.of(), List.of());
+        return build(rows, List.of(), List.of());
     }
 
     /**
-     * Creates instance of {@link GridPane} with the specified rows, column constraints, styles and configurer.
+     * Creates instance of {@link GridPane} with the specified rows and column constraints.
      *
-     * @param rows grid rows
+     * @param rows              grid rows, ignored if {@code null}
+     * @param columnConstraints column constraints, ignored if {@code null}
      * @return {@link GridPane} instance
-     * @throws NullPointerException if {@code rows}, {@code columnConstraints} or {@code styles} is {@code null}
+     */
+    public static GridPane gridPane(List<GridRow> rows, List<ColumnConstraints> columnConstraints) {
+        return build(rows, columnConstraints, List.of());
+    }
+
+    /**
+     * Creates instance of {@link GridPane} with the specified rows, column constraints and styles.
+     *
+     * @param rows              grid rows, ignored if {@code null}
+     * @param columnConstraints column constraints, ignored if {@code null}
+     * @param styles            CSS style classes, ignored if {@code null}
+     * @return {@link GridPane} instance
      */
     public static GridPane gridPane(List<GridRow> rows, List<ColumnConstraints> columnConstraints,
             List<String> styles)
     {
-        return build(
-                Objects.requireNonNull(rows, "Rows cannot be null"),
-                Objects.requireNonNull(columnConstraints, "Column constraints cannot be null"),
-                Objects.requireNonNull(styles, "Styles cannot be null"));
+        return build(rows, columnConstraints, styles);
     }
 
     private static GridPane build(List<GridRow> rows, List<ColumnConstraints> columnConstraints, List<String> styles) {
         var pane = new GridPane();
-        pane.getStyleClass().addAll(styles);
+        if (styles != null && !styles.isEmpty()) {
+            pane.getStyleClass().addAll(styles);
+        }
+        if (columnConstraints != null && !columnConstraints.isEmpty()) {
+            pane.getColumnConstraints().addAll(columnConstraints);
+        }
+        if (rows == null || rows.isEmpty()) return pane;
 
         int rowIndex = 0;
 
@@ -98,10 +110,6 @@ public final class GridPaneFactory {
 
             pane.getRowConstraints().add(row.rowConstraints());
             rowIndex++;
-        }
-
-        if (!columnConstraints.isEmpty()) {
-            pane.getColumnConstraints().addAll(columnConstraints);
         }
 
         return pane;

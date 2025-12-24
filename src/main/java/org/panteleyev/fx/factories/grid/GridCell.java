@@ -10,7 +10,7 @@ import java.util.Objects;
 import static org.panteleyev.fx.Controller.SKIP;
 
 /**
- * Utility class that represents grid cell with column and row spans.
+ * Represents grid cell with column and row spans.
  */
 public class GridCell extends Parent {
     private final Node node;
@@ -39,8 +39,8 @@ public class GridCell extends Parent {
      * Creates special node that configures column and row span for a grid cell containing provided node.
      *
      * @param node       node that is placed into a grid cell
-     * @param columnSpan column span
-     * @param rowSpan    row span
+     * @param columnSpan the number of columns the node's layout area should span
+     * @param rowSpan    the number of rows the node's layout area should span
      * @return grid cell node
      * @throws IllegalArgumentException if {@link org.panteleyev.fx.Controller#SKIP} is used as a node
      * @throws NullPointerException     if {@code node} is {@code null}

@@ -5,7 +5,7 @@ package org.panteleyev.fx.factories.grid;
 import javafx.scene.layout.ColumnConstraints;
 
 /**
- * This class implements factory methods for {@link ColumnConstraints}.
+ * Provides factory methods to create instances of {@link ColumnConstraints}.
  * <p>
  * <strong>Example:</strong>
  * {@snippet :
