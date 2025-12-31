@@ -33,6 +33,20 @@ public final class BoxFactory {
     /**
      * Creates new {@link HBox}.
      *
+     * @param nodes the initial set of child nodes for this pane
+     * @return {@link HBox} instance
+     * @throws NullPointerException if {@code nodes} is {@code null}
+     */
+    public static HBox hBox(Node... nodes) {
+        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        var box = new HBox();
+        addNodes(box, Arrays.asList(nodes));
+        return box;
+    }
+
+    /**
+     * Creates new {@link HBox}.
+     *
      * @param spacing the amount of horizontal space between each node
      * @param nodes   the initial set of child nodes for this pane
      * @return {@link HBox} instance
@@ -42,6 +56,20 @@ public final class BoxFactory {
         Objects.requireNonNull(nodes, "Nodes cannot be null");
         var box = new HBox(spacing);
         addNodes(box, Arrays.asList(nodes));
+        return box;
+    }
+
+    /**
+     * Creates new {@link HBox}.
+     *
+     * @param nodes the initial set of child nodes for this pane
+     * @return {@link HBox} instance
+     * @throws NullPointerException if {@code nodes} is {@code null}
+     */
+    public static HBox hBox(List<Node> nodes) {
+        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        var box = new HBox();
+        addNodes(box, nodes);
         return box;
     }
 
@@ -63,6 +91,20 @@ public final class BoxFactory {
     /**
      * Creates new {@link VBox}.
      *
+     * @param nodes the initial set of children for this pane
+     * @return {@link VBox} instance
+     * @throws NullPointerException if {@code nodes} is {@code null}
+     */
+    public static VBox vBox(Node... nodes) {
+        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        var box = new VBox();
+        addNodes(box, Arrays.asList(nodes));
+        return box;
+    }
+
+    /**
+     * Creates new {@link VBox}.
+     *
      * @param spacing the amount of vertical space between each child node
      * @param nodes   the initial set of children for this pane
      * @return {@link VBox} instance
@@ -72,6 +114,20 @@ public final class BoxFactory {
         Objects.requireNonNull(nodes, "Nodes cannot be null");
         var box = new VBox(spacing);
         addNodes(box, Arrays.asList(nodes));
+        return box;
+    }
+
+    /**
+     * Creates new {@link VBox}.
+     *
+     * @param nodes the initial set of children for this pane
+     * @return {@link VBox} instance
+     * @throws NullPointerException if {@code nodes} is {@code null}
+     */
+    public static VBox vBox(List<Node> nodes) {
+        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        var box = new VBox();
+        addNodes(box, nodes);
         return box;
     }
 

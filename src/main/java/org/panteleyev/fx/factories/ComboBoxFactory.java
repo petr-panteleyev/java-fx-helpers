@@ -70,6 +70,17 @@ public final class ComboBoxFactory {
     /**
      * Creates an instance of {code ComboBoxListCell}.
      *
+     * @param converter function that converts T values to {@link String}
+     * @param <T>       item type
+     * @return {code ComboBoxListCell}
+     */
+    public static <T> ComboBoxListCell<T> comboBoxListCell(Function<T, String> converter) {
+        return new ComboBoxListCellImpl<>(null, converter, null, null);
+    }
+
+    /**
+     * Creates an instance of {code ComboBoxListCell}.
+     *
      * @param defaultValue default value show when no item is selected
      * @param converter    function that converts T values to {@link String}
      * @param <T>          item type

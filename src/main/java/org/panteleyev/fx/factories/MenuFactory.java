@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
@@ -34,7 +36,7 @@ public final class MenuFactory {
     //
 
     /**
-     * Creates new menu item.
+     * Creates menu item.
      *
      * @param text the display text
      * @return menu item
@@ -44,7 +46,7 @@ public final class MenuFactory {
     }
 
     /**
-     * Creates new menu item.
+     * Creates menu item.
      *
      * @param text    the display text
      * @param graphic the graphic node
@@ -52,6 +54,37 @@ public final class MenuFactory {
      */
     public static MenuItem menuItem(String text, Node graphic) {
         return new MenuItem(text, graphic);
+    }
+
+    /**
+     * Creates menu item.
+     *
+     * @param text         the display text
+     * @param eventHandler the value for the {@code onAction} property, ignored if {@code null}
+     * @return menu item
+     */
+    public static MenuItem menuItem(String text, EventHandler<ActionEvent> eventHandler) {
+        var item = menuItem(text);
+        if (eventHandler != null) {
+            item.setOnAction(eventHandler);
+        }
+        return item;
+    }
+
+    /**
+     * Creates menu item.
+     *
+     * @param text         the display text
+     * @param graphic      the graphic node
+     * @param eventHandler the value for the {@code onAction} property, ignored if {@code null}
+     * @return menu item
+     */
+    public static MenuItem menuItem(String text, Node graphic, EventHandler<ActionEvent> eventHandler) {
+        var item = menuItem(text, graphic);
+        if (eventHandler != null) {
+            item.setOnAction(eventHandler);
+        }
+        return item;
     }
 
     //

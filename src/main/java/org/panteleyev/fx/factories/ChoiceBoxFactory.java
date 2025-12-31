@@ -36,15 +36,7 @@ public final class ChoiceBoxFactory {
         return new ChoiceBox<>(observableList(items));
     }
 
-    /**
-     * Creates {@link ChoiceBox} instance.
-     *
-     * @param items      {@link ChoiceBox} items
-     * @param configurer configuration function, ignored if {@code null}
-     * @param <T>        type of items
-     * @return {@link ChoiceBox}instance
-     * @throws NullPointerException if {@code items} is {@code null}
-     */
+    @Deprecated(since = "2.2.0", forRemoval = true)
     public static <T> ChoiceBox<T> choiceBox(Collection<T> items, Consumer<ChoiceBox<T>> configurer) {
         Objects.requireNonNull(items, "Items cannot be null");
 
@@ -68,15 +60,7 @@ public final class ChoiceBoxFactory {
         return new ChoiceBox<>(FXCollections.observableArrayList(items));
     }
 
-    /**
-     * Creates {@link ChoiceBox} instance.
-     *
-     * @param items      {@link ChoiceBox} items
-     * @param configurer configuration function, ignored if {@code null}
-     * @param <T>        type of items
-     * @return {@link ChoiceBox} instance
-     * @throws NullPointerException if {@code items} is {@code null}
-     */
+    @Deprecated(since = "2.2.0", forRemoval = true)
     public static <T> ChoiceBox<T> choiceBox(T[] items, Consumer<ChoiceBox<T>> configurer) {
         Objects.requireNonNull(items, "Items cannot be null");
         return choiceBox(FXCollections.observableArrayList(items), configurer);

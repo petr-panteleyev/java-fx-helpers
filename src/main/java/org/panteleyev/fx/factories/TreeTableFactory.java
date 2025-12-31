@@ -187,6 +187,16 @@ public final class TreeTableFactory {
     //
 
     /**
+     * Creates an empty TreeItem.
+     *
+     * @param <T> The type of the value contained within the TreeItem.
+     * @return tree item
+     */
+    public static <T> TreeItem<T> treeItem() {
+        return new TreeItem<>();
+    }
+
+    /**
      * Creates a TreeItem with the value property set to the provided object.
      *
      * @param value The object to be stored as the value of this TreeItem.
