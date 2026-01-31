@@ -1,4 +1,4 @@
-// Copyright © 2020-2025 Petr Panteleyev
+// Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Objects;
 
 /**
@@ -19,8 +21,29 @@ public class Controller {
     public static final Node SKIP = new Parent() {
     };
 
+    private static final String CSS_PREFIX = "data:text/css;base64,";
+
     private final Stage stage;
     private final String css;
+
+    /**
+     * Encodes string containing style sheet to the form usable instead of resource file.
+     * <p>
+     * <strong>Example:</strong>
+     * {@snippet :
+     * public class MyController {
+     *     public MyConroller(Stage stage) {
+     *         super(stage, encodeStyleSheet("* { -fx-color: red; }"));
+     *     }
+     * }
+     *}
+     *
+     * @param css CSS string
+     * @return encoded style sheet
+     */
+    public static String encodeStyleSheet(String css) {
+        return CSS_PREFIX + Base64.getEncoder().encodeToString(css.getBytes(StandardCharsets.UTF_8));
+    }
 
     /**
      * Creates controller based on existing stage.
