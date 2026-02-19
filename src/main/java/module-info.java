@@ -1,6 +1,5 @@
-// Copyright © 2020-2025 Petr Panteleyev
+// Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
-
 import java.util.function.Consumer;
 
 /**
@@ -45,7 +44,7 @@ module org.panteleyev.fx {
     requires transitive javafx.graphics;
     requires transitive javafx.controls;
 
-    requires org.panteleyev.functional;
+    requires transitive org.panteleyev.functional;
 
     exports org.panteleyev.fx;
     exports org.panteleyev.fx.factories.grid;
