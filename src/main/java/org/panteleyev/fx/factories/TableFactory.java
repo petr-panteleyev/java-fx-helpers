@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 
 import java.util.Comparator;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -27,8 +26,6 @@ import java.util.function.Function;
  * <p>
  * Object columns do not require converter function however they almost always require cell factory otherwise
  * {@link Object#toString()} will be used.
- * <p>
- * Column parameters not covered by this factory methods can be configured via {@link org.panteleyev.functional.Scope#apply(Object, Consumer)}.
  */
 public final class TableFactory {
 

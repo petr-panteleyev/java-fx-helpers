@@ -1,4 +1,4 @@
-// Copyright © 2020-2025 Petr Panteleyev
+// Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
@@ -12,8 +12,6 @@ import javafx.scene.control.MenuItem;
 
 import java.util.Arrays;
 import java.util.Objects;
-
-import static org.panteleyev.functional.Scope.apply;
 
 /**
  * Provides factory methods to create menus, menu items, etc.
@@ -154,7 +152,9 @@ public final class MenuFactory {
      * @return menu bar
      */
     public static MenuBar menuBar(Menu... menus) {
-        return apply(new MenuBar(menus), menuBar -> menuBar.setUseSystemMenuBar(true));
+        var menuBar = new MenuBar(menus);
+        menuBar.setUseSystemMenuBar(true);
+        return menuBar;
     }
 
     private MenuFactory() {

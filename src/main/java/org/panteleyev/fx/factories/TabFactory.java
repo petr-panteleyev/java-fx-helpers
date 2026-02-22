@@ -1,11 +1,9 @@
-// Copyright © 2022-2025 Petr Panteleyev
+// Copyright © 2022-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
-
-import static org.panteleyev.functional.Scope.apply;
 
 /**
  * Provides factory methods to create instances of {@link Tab}.
@@ -19,7 +17,9 @@ public final class TabFactory {
      * @return tab
      */
     public static Tab tab() {
-        return apply(new Tab(), tab -> tab.setClosable(false));
+        var tab = new Tab();
+        tab.setClosable(false);
+        return tab;
     }
 
     /**
@@ -29,7 +29,9 @@ public final class TabFactory {
      * @return tab
      */
     public static Tab tab(String text) {
-        return apply(new Tab(text), tab -> tab.setClosable(false));
+        var tab = new Tab(text);
+        tab.setClosable(false);
+        return tab;
     }
 
     /**
@@ -40,7 +42,9 @@ public final class TabFactory {
      * @return tab
      */
     public static Tab tab(String text, Node node) {
-        return apply(new Tab(text, node), tab -> tab.setClosable(false));
+        var tab = new Tab(text, node);
+        tab.setClosable(false);
+        return tab;
     }
 
     private TabFactory() {

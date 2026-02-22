@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories.grid;
 
@@ -7,7 +7,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 import static org.panteleyev.fx.Controller.SKIP;
 
@@ -16,9 +15,6 @@ import static org.panteleyev.fx.Controller.SKIP;
  * <p>
  * Configuration is done by rows. If some node requires column or/and row span configured then
  * {@link GridCell#gridCell(Node, int, int)} must be used instead of node itself.
- * <p>
- * Additional configuration for the grid pane can be done using
- * {@link org.panteleyev.functional.Scope#apply(Object, Consumer)}.
  * <p>
  * <strong>Example:</strong>
  * <p>

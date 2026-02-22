@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
@@ -6,8 +6,6 @@ import javafx.stage.FileChooser;
 
 import java.util.List;
 import java.util.Objects;
-
-import static org.panteleyev.functional.Scope.apply;
 
 /**
  * Provides factory methods to create instances of {@link FileChooser}.
@@ -32,10 +30,10 @@ public final class FileChooserFactory {
     public static FileChooser fileChooser(String title, List<FileChooser.ExtensionFilter> extensionFilters) {
         Objects.requireNonNull(extensionFilters, "Extension filters cannot be null");
 
-        return apply(new FileChooser(), chooser -> {
-            chooser.setTitle(title);
-            chooser.getExtensionFilters().addAll(extensionFilters);
-        });
+        var chooser = new FileChooser();
+        chooser.setTitle(title);
+        chooser.getExtensionFilters().addAll(extensionFilters);
+        return chooser;
     }
 
     private FileChooserFactory() {

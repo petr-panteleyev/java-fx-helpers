@@ -1,10 +1,8 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
 import javafx.scene.control.CheckBox;
-
-import static org.panteleyev.functional.Scope.apply;
 
 /**
  * Provides factory methods to create instances of {@link javafx.scene.control.CheckBox}.
@@ -38,7 +36,9 @@ public final class CheckBoxFactory {
      * @return checkbox
      */
     public static CheckBox checkBox(String text, boolean selected) {
-        return apply(checkBox(text), checkBox -> checkBox.setSelected(selected));
+        var checkBox = new CheckBox(text);
+        checkBox.setSelected(selected);
+        return checkBox;
     }
 
     private CheckBoxFactory() {

@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
@@ -18,8 +18,6 @@ import javafx.scene.input.KeyCombination;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.panteleyev.functional.Scope.apply;
 
 /**
  * This class implements the concept of UI action. The purpose is to uniformly create multiple UI controls for the same
@@ -208,13 +206,13 @@ public final class FxAction {
      * @return menu item
      */
     public MenuItem createMenuItem() {
-        return apply(new MenuItem(), menuItem -> {
-            menuItem.textProperty().bind(textProperty);
-            menuItem.acceleratorProperty().bind(acceleratorProperty);
-            menuItem.disableProperty().bind(disableProperty);
-            menuItem.onActionProperty().bind(onActionProperty);
-            menuItem.visibleProperty().bind(visibleProperty);
-        });
+        var menuItem = new MenuItem();
+        menuItem.textProperty().bind(textProperty);
+        menuItem.acceleratorProperty().bind(acceleratorProperty);
+        menuItem.disableProperty().bind(disableProperty);
+        menuItem.onActionProperty().bind(onActionProperty);
+        menuItem.visibleProperty().bind(visibleProperty);
+        return menuItem;
     }
 
     /**
@@ -223,13 +221,12 @@ public final class FxAction {
      * @return check menu item
      */
     public CheckMenuItem createCheckMenuItem() {
-        var checkMenuItem = apply(new CheckMenuItem(), item -> {
-            item.textProperty().bind(textProperty);
-            item.acceleratorProperty().bind(acceleratorProperty);
-            item.disableProperty().bind(disableProperty);
-            item.onActionProperty().bind(onActionProperty);
-            item.visibleProperty().bind(visibleProperty);
-        });
+        var checkMenuItem = new CheckMenuItem();
+        checkMenuItem.textProperty().bind(textProperty);
+        checkMenuItem.acceleratorProperty().bind(acceleratorProperty);
+        checkMenuItem.disableProperty().bind(disableProperty);
+        checkMenuItem.onActionProperty().bind(onActionProperty);
+        checkMenuItem.visibleProperty().bind(visibleProperty);
 
         synchronized (checkMenuItemList) {
             checkMenuItemList.add(new WeakReference<>(checkMenuItem));
@@ -243,12 +240,12 @@ public final class FxAction {
      * @return button
      */
     public Button createButton() {
-        return apply(new Button(), button -> {
-            button.textProperty().bind(textProperty);
-            button.disableProperty().bind(disableProperty);
-            button.onActionProperty().bind(onActionProperty);
-            button.visibleProperty().bind(visibleProperty);
-        });
+        var button = new Button();
+        button.textProperty().bind(textProperty);
+        button.disableProperty().bind(disableProperty);
+        button.onActionProperty().bind(onActionProperty);
+        button.visibleProperty().bind(visibleProperty);
+        return button;
     }
 
     private void onSelectedPropertyChanged(boolean oldValue, boolean newValue) {

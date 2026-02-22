@@ -1,6 +1,5 @@
 // Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
-import java.util.function.Consumer;
 
 /**
  * Defines helper and factory classes for JavaFX.
@@ -8,7 +7,7 @@ import java.util.function.Consumer;
  * The goal of this API is to provide more convenient way to create and configure JavaFX controls.
  * <p>
  * Most factory methods use the same combination of parameters as corresponding JavaFX constructors. Additional
- * configuration can be done fluently using {@link org.panteleyev.functional.Scope#apply(Object, Consumer)}.
+ * configuration can be done fluently using {@code org.panteleyev.functional.Scope.apply(Object, Consumer)}.
  * <p>
  * For simple classes using this API does not necessarily reduce the code size however provides more fluent way of
  * constructing scene graph.
@@ -43,8 +42,6 @@ module org.panteleyev.fx {
     requires transitive javafx.base;
     requires transitive javafx.graphics;
     requires transitive javafx.controls;
-
-    requires transitive org.panteleyev.functional;
 
     exports org.panteleyev.fx;
     exports org.panteleyev.fx.factories.grid;

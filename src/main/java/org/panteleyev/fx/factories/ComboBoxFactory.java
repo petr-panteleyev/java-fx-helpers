@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
@@ -16,8 +16,6 @@ import javafx.util.Callback;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
-
-import static org.panteleyev.functional.Scope.apply;
 
 /**
  * Provides factory methods to create instances of {@link ComboBox}.
@@ -135,10 +133,10 @@ public final class ComboBoxFactory {
         Objects.requireNonNull(items, "Items cannot be null");
         Objects.requireNonNull(cellFactory, "Cell factory cannot be null");
 
-        return apply(new ComboBox<>(items(items)), cb -> {
-            cb.setCellFactory(cellFactory);
-            cb.setButtonCell(cellFactory.call(null));
-        });
+        var comboBox = new ComboBox<>(items(items));
+        comboBox.setCellFactory(cellFactory);
+        comboBox.setButtonCell(cellFactory.call(null));
+        return comboBox;
     }
 
     /**
