@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -12,11 +13,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.KeyCombination;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -39,6 +44,11 @@ public final class FxAction {
     private final BooleanProperty visibleProperty = new SimpleBooleanProperty(true);
 
     private final List<WeakReference<CheckMenuItem>> checkMenuItemList = new ArrayList<>();
+
+    /**
+     * Special action that represents separator.
+     */
+    public static final FxAction ACTION_SEPARATOR = fxAction("separator");
 
     private FxAction() {
         selectedProperty.addListener((_, oldValue, newValue) -> {
@@ -115,6 +125,17 @@ public final class FxAction {
      */
     public FxAction disable(boolean disable) {
         disableProperty.set(disable);
+        return this;
+    }
+
+    /**
+     * Binds disable property
+     *
+     * @param binding binding
+     * @return this action
+     */
+    public FxAction disableBinding(BooleanBinding binding) {
+        disableProperty.bind(binding);
         return this;
     }
 
@@ -260,4 +281,41 @@ public final class FxAction {
             }
         }
     }
+
+    /**
+     * Creates menu from the collection of actions.
+     *
+     * @param text    menu text
+     * @param actions actions
+     * @return menu
+     */
+    public static Menu createMenu(String text, Collection<FxAction> actions) {
+        var menu = new Menu(text);
+        addMenuItems(menu.getItems(), actions);
+        return menu;
+    }
+
+    /**
+     * Creates context menu from the collection of actions.
+     *
+     * @param actions actions
+     * @return context menu
+     */
+    public static ContextMenu createContextMenu(Collection<FxAction> actions) {
+        var menu = new ContextMenu();
+        addMenuItems(menu.getItems(), actions);
+        return menu;
+    }
+
+    private static void addMenuItems(List<MenuItem> items, Collection<FxAction> actions) {
+        for (var action : actions) {
+            if (action == ACTION_SEPARATOR) {
+                items.add(new SeparatorMenuItem());
+            } else {
+                items.add(action.createMenuItem());
+            }
+        }
+    }
+
+
 }

@@ -1,18 +1,18 @@
 # Build
 
-This library can be built with JDK 24 and newer.
+This library can be built with JDK 25 and newer.
 
-* Set ```JAVA_HOME``` to JDK 24+
+* Set ```JAVA_HOME``` to JDK 25+
 * Setup Maven toolchain:
 
 ```xml    
 <toolchain>
     <type>jdk</type>
     <provides>
-        <version>24</version>
+        <version>25</version>
     </provides>
     <configuration>
-        <jdkHome>/path/to/jdk-24</jdkHome>
+        <jdkHome>/path/to/jdk-25</jdkHome>
     </configuration>
 </toolchain>
 ```
@@ -20,5 +20,5 @@ This library can be built with JDK 24 and newer.
 * Execute:
 
 ```shell script
-$ ./mvnw clean install
+$ mvn clean install
 ```
