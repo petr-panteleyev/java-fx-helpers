@@ -1,4 +1,4 @@
-// Copyright © 2020-2025 Petr Panteleyev
+// Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
@@ -6,8 +6,10 @@ import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.stage.Window;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -104,5 +106,25 @@ public class BaseDialog<R> extends Dialog<R> {
     protected Optional<Button> getButton(ButtonType type) {
         var node = getDialogPane().lookupButton(type);
         return node == null ? Optional.empty() : Optional.of((Button) node);
+    }
+
+
+    /**
+     * Adds accelerator for this dialog scene.
+     *
+     * @param accelerator key code combination
+     * @param action      action
+     */
+    public void addAccelerator(KeyCodeCombination accelerator, Runnable action) {
+        getDialogPane().getScene().getAccelerators().put(accelerator, action);
+    }
+
+    /**
+     * Adds accelerators for this dialog scene.
+     *
+     * @param accelerators key code combinations with actions
+     */
+    public void addAccelerators(Map<KeyCodeCombination, Runnable> accelerators) {
+        getDialogPane().getScene().getAccelerators().putAll(accelerators);
     }
 }

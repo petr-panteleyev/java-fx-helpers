@@ -5,10 +5,12 @@ package org.panteleyev.fx;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.stage.Stage;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -173,5 +175,34 @@ public class Controller {
         if (positionAndSize.maximized()) {
             stage.setMaximized(true);
         }
+    }
+
+    /**
+     * Adds accelerator for this constroller stage's scene.
+     *
+     * @param accelerator key code combination
+     * @param action      action
+     * @throws IllegalStateException if scene is not set
+     */
+    public void addAccelerator(KeyCodeCombination accelerator, Runnable action) {
+        if (stage.getScene() == null) {
+            throw new IllegalStateException("Scene is not set");
+        }
+
+        stage.getScene().getAccelerators().put(accelerator, action);
+    }
+
+    /**
+     * Adds accelerators for this constroller stage's scene.
+     *
+     * @param accelerators key code combinations with actions
+     * @throws IllegalStateException if scene is not set
+     */
+    public void addAccelerators(Map<KeyCodeCombination, Runnable> accelerators) {
+        if (stage.getScene() == null) {
+            throw new IllegalStateException("Scene is not set");
+        }
+
+        stage.getScene().getAccelerators().putAll(accelerators);
     }
 }

@@ -1,12 +1,8 @@
 # JavaFX Helpers
 
-[![License](https://www.panteleyev.org/badges/license-bsd-2.svg)](LICENSE)
-[![JDK](https://www.panteleyev.org/badges/java-25.svg)](https://jdk.java.net/25/)
-[![JavaFX](https://www.panteleyev.org/badges/javafx-25.svg)](https://jdk.java.net/javafx25/)
-
 Helper classes and factories for JavaFX.
 
-The goal is to provide somewhat more convenient way of working with Java FX controls API.
+The goal is to provide a bit more convenient way of working with Java FX controls API.
 
 ## Artifact
 
@@ -14,9 +10,13 @@ The goal is to provide somewhat more convenient way of working with Java FX cont
 <dependency>
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.2</version>
 </dependency>
 ```
+
+Library is built with JDK 25.
+
+## References
 
 * [API Documentation](https://www.panteleyev.org/javadoc/java-fx-helpers/)
 * [Java Functional Extensions](https://www.panteleyev.org/javadoc/java-functional/)
