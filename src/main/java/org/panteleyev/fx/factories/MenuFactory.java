@@ -116,7 +116,7 @@ public final class MenuFactory {
      * @return an instance of {@link CheckMenuItem}
      */
     public static CheckMenuItem checkMenuItem(String text, Node graphic) {
-        return new CheckMenuItem(text);
+        return new CheckMenuItem(text, graphic);
     }
 
     /**

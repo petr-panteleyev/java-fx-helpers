@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static org.panteleyev.fx.hidden.Strings.NODES_NPE;
+
 /**
  * Holds grid row attributes.
  */
@@ -42,7 +44,7 @@ public class GridRow {
      */
     public static GridRow gridRow(List<Node> nodes) {
         return new GridRow(
-                Objects.requireNonNull(nodes, "Nodes cannot be null"),
+                Objects.requireNonNull(nodes, NODES_NPE),
                 new RowConstraints());
     }
 
@@ -68,7 +70,7 @@ public class GridRow {
      */
     public static GridRow gridRow(List<Node> nodes, RowConstraints constraints) {
         return new GridRow(
-                Objects.requireNonNull(nodes, "Nodes cannot be null"),
-                Objects.requireNonNull(constraints, "Row constraints cannot be null"));
+                Objects.requireNonNull(nodes, NODES_NPE),
+                Objects.requireNonNull(constraints, "Row constraints must not be null"));
     }
 }

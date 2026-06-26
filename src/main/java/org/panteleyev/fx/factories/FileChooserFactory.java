@@ -28,7 +28,7 @@ public final class FileChooserFactory {
      * @throws NullPointerException if {@code extensionFilters} is {@code null}
      */
     public static FileChooser fileChooser(String title, List<FileChooser.ExtensionFilter> extensionFilters) {
-        Objects.requireNonNull(extensionFilters, "Extension filters cannot be null");
+        Objects.requireNonNull(extensionFilters, "Extension filters must not be null");
 
         var chooser = new FileChooser();
         chooser.setTitle(title);

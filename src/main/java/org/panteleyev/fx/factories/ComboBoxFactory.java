@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
+import static org.panteleyev.fx.hidden.Strings.ITEMS_NPE;
+
 /**
  * Provides factory methods to create instances of {@link ComboBox}.
  */
@@ -84,7 +86,9 @@ public final class ComboBoxFactory {
      * @param <T>          item type
      * @return {code ComboBoxListCell}
      */
-    public static <T> ComboBoxListCell<T> comboBoxListCell(String defaultValue, Function<T, String> converter) {
+    public static <T> ComboBoxListCell<T> comboBoxListCell(String defaultValue,
+            Function<T, String> converter)
+    {
         return new ComboBoxListCellImpl<>(defaultValue, converter, null, null);
     }
 
@@ -116,7 +120,7 @@ public final class ComboBoxFactory {
      */
     public static <T> ComboBox<T> comboBox(List<T> items) {
         return new ComboBox<>(
-                items(Objects.requireNonNull(items, "Items cannot be null"))
+                items(Objects.requireNonNull(items, ITEMS_NPE))
         );
     }
 
@@ -130,7 +134,7 @@ public final class ComboBoxFactory {
      * @throws NullPointerException if {@code items} or {@code cellFactory} is {@code null}
      */
     public static <T> ComboBox<T> comboBox(List<T> items, Callback<ListView<T>, ListCell<T>> cellFactory) {
-        Objects.requireNonNull(items, "Items cannot be null");
+        Objects.requireNonNull(items, ITEMS_NPE);
         Objects.requireNonNull(cellFactory, "Cell factory cannot be null");
 
         var comboBox = new ComboBox<>(items(items));
@@ -149,7 +153,7 @@ public final class ComboBoxFactory {
      */
     public static <T> ComboBox<T> comboBox(T[] items) {
         return new ComboBox<>(
-                FXCollections.observableArrayList((Objects.requireNonNull(items, "Items cannot be null")))
+                FXCollections.observableArrayList((Objects.requireNonNull(items, ITEMS_NPE)))
         );
     }
 
@@ -161,7 +165,7 @@ public final class ComboBoxFactory {
      * @throws NullPointerException if {@code comboBoxes} is {@code null}
      */
     public static void clearValueAndSelection(ComboBox<?>... comboBoxes) {
-        Objects.requireNonNull(comboBoxes, "List of ComboBox instances cannot be null");
+        Objects.requireNonNull(comboBoxes, "List of ComboBox instances must not be null");
         for (var cb : comboBoxes) {
             cb.setValue(null);
             cb.getSelectionModel().select(null);

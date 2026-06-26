@@ -38,7 +38,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static HBox hBox(Node... nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new HBox();
         addNodes(box, Arrays.asList(nodes));
         return box;
@@ -53,7 +53,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static HBox hBox(double spacing, Node... nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new HBox(spacing);
         addNodes(box, Arrays.asList(nodes));
         return box;
@@ -67,7 +67,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static HBox hBox(List<Node> nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new HBox();
         addNodes(box, nodes);
         return box;
@@ -82,7 +82,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static HBox hBox(double spacing, List<Node> nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new HBox(spacing);
         addNodes(box, nodes);
         return box;
@@ -96,7 +96,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static VBox vBox(Node... nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new VBox();
         addNodes(box, Arrays.asList(nodes));
         return box;
@@ -111,7 +111,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static VBox vBox(double spacing, Node... nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new VBox(spacing);
         addNodes(box, Arrays.asList(nodes));
         return box;
@@ -125,7 +125,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static VBox vBox(List<Node> nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new VBox();
         addNodes(box, nodes);
         return box;
@@ -140,7 +140,7 @@ public final class BoxFactory {
      * @throws NullPointerException if {@code nodes} is {@code null}
      */
     public static VBox vBox(double spacing, List<Node> nodes) {
-        Objects.requireNonNull(nodes, "Nodes cannot be null");
+        Objects.requireNonNull(nodes, "Nodes must not be null");
         var box = new VBox(spacing);
         addNodes(box, nodes);
         return box;

@@ -46,7 +46,7 @@ public class GridCell extends Parent {
      * @throws NullPointerException     if {@code node} is {@code null}
      */
     public static Node gridCell(Node node, int columnSpan, int rowSpan) {
-        Objects.requireNonNull(node, "Node cannot be null");
+        Objects.requireNonNull(node, "Node must not be null");
         if (node == SKIP) {
             throw new IllegalArgumentException("SKIP special node cannot be used in gridCell()");
         }

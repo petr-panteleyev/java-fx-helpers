@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Implements base class for dialogs.
  *
@@ -28,7 +30,7 @@ public class BaseDialog<R> extends Dialog<R> {
     /**
      * Creates dialog instance with specified owner.
      *
-     * @param owner owner
+     * @param owner owner, ignored if {@code null}
      */
     public BaseDialog(Controller owner) {
         this();
@@ -40,7 +42,7 @@ public class BaseDialog<R> extends Dialog<R> {
     /**
      * Creates dialog instance with no owner and specified style sheet.
      *
-     * @param cssUrl style sheet url
+     * @param cssUrl style sheet url, ignored if {@code null}
      */
     public BaseDialog(String cssUrl) {
         this(null, cssUrl);
@@ -50,7 +52,7 @@ public class BaseDialog<R> extends Dialog<R> {
      * Creates dialog instance with specified owner and style sheet.
      *
      * @param owner  owner
-     * @param cssUrl style sheet url
+     * @param cssUrl style sheet url, ignored if {@code null}
      */
     public BaseDialog(Controller owner, String cssUrl) {
         this(owner);
@@ -70,7 +72,7 @@ public class BaseDialog<R> extends Dialog<R> {
      * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel" resource for Cancel
      * translation.
      *
-     * @param rb resource bundle
+     * @param rb resource bundle, ignored if {@code null}
      */
     protected void createDefaultButtons(ResourceBundle rb) {
         createDefaultButtons(rb, null);
@@ -80,8 +82,8 @@ public class BaseDialog<R> extends Dialog<R> {
      * Creates OK and Cancel buttons. Supplied resource bundle must define "button.Cancel" resource for Cancel
      * translation.
      *
-     * @param rb                        resource bundle
-     * @param validationInvalidProperty invalid property for validation support
+     * @param rb                        resource bundle, ignored if {@code null}
+     * @param validationInvalidProperty invalid property for validation support, ignored if {@code null}
      */
     protected void createDefaultButtons(ResourceBundle rb, ReadOnlyBooleanProperty validationInvalidProperty) {
         getDialogPane().getButtonTypes().addAll(
@@ -102,9 +104,10 @@ public class BaseDialog<R> extends Dialog<R> {
      *
      * @param type button type
      * @return button if exists
+     * @throws NullPointerException if {@code type} is {@code null}
      */
     protected Optional<Button> getButton(ButtonType type) {
-        var node = getDialogPane().lookupButton(type);
+        var node = getDialogPane().lookupButton(requireNonNull(type, "Button type must not be null"));
         return node == null ? Optional.empty() : Optional.of((Button) node);
     }
 
@@ -114,17 +117,24 @@ public class BaseDialog<R> extends Dialog<R> {
      *
      * @param accelerator key code combination
      * @param action      action
+     * @throws NullPointerException if {@code accelerator} or {@code action} is {@code null}
      */
     public void addAccelerator(KeyCodeCombination accelerator, Runnable action) {
-        getDialogPane().getScene().getAccelerators().put(accelerator, action);
+        getDialogPane().getScene().getAccelerators().put(
+                requireNonNull(accelerator, "Accelerator must not be null"),
+                requireNonNull(action, "Action must not be null")
+        );
     }
 
     /**
      * Adds accelerators for this dialog scene.
      *
      * @param accelerators key code combinations with actions
+     * @throws NullPointerException if {@code accelerators} is {@code null}
      */
     public void addAccelerators(Map<KeyCodeCombination, Runnable> accelerators) {
-        getDialogPane().getScene().getAccelerators().putAll(accelerators);
+        getDialogPane().getScene().getAccelerators().putAll(
+                requireNonNull(accelerators, "Accelerators must not be null")
+        );
     }
 }

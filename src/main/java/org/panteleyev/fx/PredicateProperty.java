@@ -1,4 +1,4 @@
-// Copyright © 2020-2025 Petr Panteleyev
+// Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
@@ -9,8 +9,9 @@ import javafx.beans.value.WeakChangeListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
 import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * This class implements property that wraps {@link Predicate} instance.
@@ -23,7 +24,8 @@ import java.util.function.Predicate;
 public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> implements Predicate<T> {
     private enum Op {
         AND,
-        OR
+        OR,
+        NOOP
     }
 
     private final Collection<PredicateProperty<T>> inputs = new ArrayList<>();
@@ -37,7 +39,7 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      */
     public PredicateProperty() {
         super(x -> true);
-        this.op = null;
+        this.op = Op.NOOP;
     }
 
     /**
@@ -48,17 +50,18 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      */
     public PredicateProperty(Object bean, String name) {
         super(bean, name, x -> true);
-        this.op = null;
+        this.op = Op.NOOP;
     }
 
     /**
      * Creates an instance with the specified predicate value.
      *
      * @param initialValue initial predicate value
+     * @throws NullPointerException if {@code initialValue} is {@code null}
      */
     public PredicateProperty(Predicate<T> initialValue) {
-        super(initialValue);
-        this.op = null;
+        super(requireNonNull(initialValue, "Predicate value must not be null"));
+        this.op = Op.NOOP;
     }
 
     /**
@@ -67,11 +70,11 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      * @param bean         bean of this property
      * @param name         name of this property
      * @param initialValue initial predicate value
+     * @throws NullPointerException if {@code initialValue} is {@code null}
      */
     public PredicateProperty(Object bean, String name, Predicate<T> initialValue) {
-        super(bean, name, initialValue);
-        Objects.requireNonNull(initialValue, "Predicate value cannot be null");
-        this.op = null;
+        super(bean, name, requireNonNull(initialValue, "Predicate value cannot be null"));
+        this.op = Op.NOOP;
     }
 
     private PredicateProperty(Op op, Collection<PredicateProperty<T>> inputs) {
@@ -95,6 +98,7 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
             result = switch (op) {
                 case AND -> result.and(p.get());
                 case OR -> result.or(p.get());
+                case NOOP -> throw new IllegalArgumentException("Can't build a predicate with NOOP");
             };
         }
         return result;
@@ -106,9 +110,10 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      * @param args arguments
      * @param <T>  type of the input to the predicate
      * @return predicate property
+     * @throws NullPointerException if {@code args} is {@code null}
      */
     public static <T> PredicateProperty<T> and(Collection<PredicateProperty<T>> args) {
-        return new PredicateProperty<>(Op.AND, args);
+        return new PredicateProperty<>(Op.AND, requireNonNull(args, "Predicate arguments must not be null"));
     }
 
     /**
@@ -117,9 +122,10 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      * @param args arguments
      * @param <T>  type of the input to the predicate
      * @return predicate property
+     * @throws NullPointerException if {@code args} is {@code null}
      */
     public static <T> PredicateProperty<T> or(Collection<PredicateProperty<T>> args) {
-        return new PredicateProperty<>(Op.OR, args);
+        return new PredicateProperty<>(Op.OR, requireNonNull(args, "Predicate arguments must not be null"));
     }
 
     /**
@@ -127,26 +133,28 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      *
      * @param predicate predicate value.
      * @throws IllegalStateException if property is calculated
+     * @throws NullPointerException  if {@code predicate} is {@code null}
      */
     @Override
     public void set(Predicate<T> predicate) {
-        if (op != null) {
+        if (op != Op.NOOP) {
             throw new IllegalStateException("Calculated property cannot be set");
         }
-        super.set(predicate);
+        super.set(requireNonNull(predicate, "Predicate must not be null"));
     }
 
     /**
      * Create a unidirectional binding for this Property.
      *
      * @param observableValue observable this {@link javafx.beans.Observable} should be bound to
+     * @throws NullPointerException if {@code observableValue} is {@code null}
      */
     @Override
     public void bind(ObservableValue<? extends Predicate<T>> observableValue) {
-        if (op != null) {
+        if (op != Op.NOOP) {
             throw new IllegalStateException("Calculated property cannot be bound");
         }
-        super.bind(observableValue);
+        super.bind(requireNonNull(observableValue, "Observable value must not be null"));
     }
 
     /**
@@ -154,13 +162,11 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      *
      * @param predicate predicate value.
      * @throws IllegalStateException if property is calculated
+     * @throws NullPointerException  if {@code predicate} is {@code null}
      */
     @Override
     public void setValue(Predicate<T> predicate) {
-        if (op != null) {
-            throw new IllegalStateException("Calculated property cannot be set");
-        }
-        super.setValue(predicate);
+        set(predicate);
     }
 
     /**
@@ -169,10 +175,7 @@ public class PredicateProperty<T> extends SimpleObjectProperty<Predicate<T>> imp
      * @throws IllegalStateException if property is calculated
      */
     public void reset() {
-        if (op != null) {
-            throw new IllegalStateException("Calculated property cannot be reset");
-        }
-        super.setValue(x -> true);
+        set(_ -> true);
     }
 
     // Predicate methods

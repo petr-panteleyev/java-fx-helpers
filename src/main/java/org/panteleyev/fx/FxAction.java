@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * This class implements the concept of UI action. The purpose is to uniformly create multiple UI controls for the same
  * event handler, text, accelerator, etc.
@@ -37,6 +39,7 @@ import java.util.List;
  */
 public final class FxAction {
     private final StringProperty textProperty = new SimpleStringProperty("");
+    @SuppressWarnings("DataFlowIssue")
     private final ObjectProperty<KeyCombination> acceleratorProperty = new SimpleObjectProperty<>(null);
     private final BooleanProperty disableProperty = new SimpleBooleanProperty(false);
     private final ObjectProperty<EventHandler<ActionEvent>> onActionProperty = new SimpleObjectProperty<>(_ -> {});
@@ -133,9 +136,10 @@ public final class FxAction {
      *
      * @param binding binding
      * @return this action
+     * @throws NullPointerException if {@code binding} is {@code null}
      */
     public FxAction disableBinding(BooleanBinding binding) {
-        disableProperty.bind(binding);
+        disableProperty.bind(requireNonNull(binding, "Binding must not be null"));
         return this;
     }
 
@@ -154,9 +158,10 @@ public final class FxAction {
      *
      * @param onAction new onAction value
      * @return this action
+     * @throws NullPointerException if {@code onAction} is {@code null}
      */
     public FxAction onAction(EventHandler<ActionEvent> onAction) {
-        onActionProperty.set(onAction);
+        onActionProperty.set(requireNonNull(onAction, "Action must not be null"));
         return this;
     }
 
@@ -288,10 +293,11 @@ public final class FxAction {
      * @param text    menu text
      * @param actions actions
      * @return menu
+     * @throws NullPointerException if {@code actions} is {@code null}
      */
     public static Menu createMenu(String text, Collection<FxAction> actions) {
         var menu = new Menu(text);
-        addMenuItems(menu.getItems(), actions);
+        addMenuItems(menu.getItems(), requireNonNull(actions, "Actions must not be null"));
         return menu;
     }
 
@@ -300,15 +306,17 @@ public final class FxAction {
      *
      * @param actions actions
      * @return context menu
+     * @throws NullPointerException if {@code actions} is {@code null}
      */
     public static ContextMenu createContextMenu(Collection<FxAction> actions) {
         var menu = new ContextMenu();
-        addMenuItems(menu.getItems(), actions);
+        addMenuItems(menu.getItems(), requireNonNull(actions, "Actions must not be null"));
         return menu;
     }
 
     private static void addMenuItems(List<MenuItem> items, Collection<FxAction> actions) {
         for (var action : actions) {
+            requireNonNull(action, "Action must not be null");
             if (action == ACTION_SEPARATOR) {
                 items.add(new SeparatorMenuItem());
             } else {
@@ -316,6 +324,4 @@ public final class FxAction {
             }
         }
     }
-
-
 }

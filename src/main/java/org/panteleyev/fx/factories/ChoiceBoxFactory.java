@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 
@@ -8,7 +8,8 @@ import javafx.scene.control.ChoiceBox;
 
 import java.util.Collection;
 import java.util.Objects;
-import java.util.function.Consumer;
+
+import static org.panteleyev.fx.hidden.Strings.ITEMS_NPE;
 
 /**
  * Provides factory methods to create instances of {@link ChoiceBox}.
@@ -22,7 +23,6 @@ import java.util.function.Consumer;
  *}
  */
 public final class ChoiceBoxFactory {
-
     /**
      * Creates {@link ChoiceBox} instance.
      *
@@ -32,19 +32,8 @@ public final class ChoiceBoxFactory {
      * @throws NullPointerException if {@code items} is {@code null}
      */
     public static <T> ChoiceBox<T> choiceBox(Collection<T> items) {
-        Objects.requireNonNull(items, "Items cannot be null");
+        Objects.requireNonNull(items, ITEMS_NPE);
         return new ChoiceBox<>(observableList(items));
-    }
-
-    @Deprecated(since = "2.2.0", forRemoval = true)
-    public static <T> ChoiceBox<T> choiceBox(Collection<T> items, Consumer<ChoiceBox<T>> configurer) {
-        Objects.requireNonNull(items, "Items cannot be null");
-
-        var choiceBox = new ChoiceBox<>(observableList(items));
-        if (configurer != null) {
-            configurer.accept(choiceBox);
-        }
-        return choiceBox;
     }
 
     /**
@@ -56,14 +45,8 @@ public final class ChoiceBoxFactory {
      * @throws NullPointerException if {@code items} is {@code null}
      */
     public static <T> ChoiceBox<T> choiceBox(T[] items) {
-        Objects.requireNonNull(items, "Items cannot be null");
+        Objects.requireNonNull(items, ITEMS_NPE);
         return new ChoiceBox<>(FXCollections.observableArrayList(items));
-    }
-
-    @Deprecated(since = "2.2.0", forRemoval = true)
-    public static <T> ChoiceBox<T> choiceBox(T[] items, Consumer<ChoiceBox<T>> configurer) {
-        Objects.requireNonNull(items, "Items cannot be null");
-        return choiceBox(FXCollections.observableArrayList(items), configurer);
     }
 
     private static <T> ObservableList<T> observableList(Collection<T> items) {

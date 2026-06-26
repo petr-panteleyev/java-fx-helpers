@@ -11,7 +11,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>2.5.2</version>
+    <version>2.6.0</version>
 
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -37,6 +37,71 @@
         <url>https://github.com/petr-panteleyev/java-fx-helpers/tree/master</url>
     </scm>
 
+    <profiles>
+        <profile>
+            <id>central</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${nexusStagingMavenPlugin}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <repositories>
+                <repository>
+                    <id>maven_central</id>
+                    <name>Maven Central</name>
+                    <url>https://repo.maven.apache.org/maven2/</url>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>private</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-ssh</artifactId>
+                        <version>${mavenWagonSshPluginVersion}</version>
+                        <extensions>true</extensions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.github.mwiede</groupId>
+                                <artifactId>jsch</artifactId>
+                                <version>${jSchVersion}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.apache.maven.wagon</groupId>
+                                <artifactId>wagon-ssh</artifactId>
+                                <version>${mavenWagonSshPluginVersion}</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>com.jcraft</groupId>
+                                        <artifactId>jsch</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <repository>
+                    <id>panteleyev.org</id>
+                    <url>${env.MAVEN_DEPLOY_URL}</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
@@ -48,10 +113,12 @@
         <mavenJavadocPluginVersion>3.12.0</mavenJavadocPluginVersion>
         <mavenSourcePluginVersion>3.4.0</mavenSourcePluginVersion>
         <mavenGpgPluginVersion>3.2.8</mavenGpgPluginVersion>
+        <mavenWagonSshPluginVersion>3.5.3</mavenWagonSshPluginVersion>
         <nexusStagingMavenPlugin>0.9.0</nexusStagingMavenPlugin>
         <!-- Dependencies -->
         <javaFxVersion>25.0.2</javaFxVersion>
-        <jUnitVersion>6.0.3</jUnitVersion>
+        <jUnitVersion>6.1.0</jUnitVersion>
+        <jSchVersion>2.28.3</jSchVersion>
     </properties>
 
     <dependencies>
@@ -181,24 +248,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>${nexusStagingMavenPlugin}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <publishingServerId>central</publishingServerId>
-                    <autoPublish>true</autoPublish>
-                    <waitUntil>published</waitUntil>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>maven_central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
-    </repositories>
 </project>

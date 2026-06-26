@@ -31,7 +31,7 @@ public final class TextFieldFactory {
      * @throws NullPointerException if {@code fieldSupplier} is {@code null}
      */
     public static TextField searchField(Supplier<TextField> fieldSupplier, Consumer<String> valueCallback) {
-        Objects.requireNonNull(fieldSupplier, "Field supplier cannot be null");
+        Objects.requireNonNull(fieldSupplier, "Field supplier must not be null");
 
         var searchField = fieldSupplier.get();
         searchField.setPrefColumnCount(20);

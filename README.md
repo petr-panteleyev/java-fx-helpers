@@ -10,7 +10,7 @@ The goal is to provide a bit more convenient way of working with Java FX control
 <dependency>
     <groupId>org.panteleyev</groupId>
     <artifactId>java-fx-helpers</artifactId>
-    <version>2.5.2</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 

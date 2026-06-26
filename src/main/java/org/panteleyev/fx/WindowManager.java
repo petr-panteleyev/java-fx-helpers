@@ -1,4 +1,4 @@
-// Copyright © 2020-2025 Petr Panteleyev
+// Copyright © 2020-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx;
 
@@ -6,11 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.stage.Window;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * This class implements window manager to enumerate active {@link Controller controllers} opened by the application.
@@ -26,8 +27,15 @@ public final class WindowManager {
         return new WindowManager(Window::getWindows);
     }
 
+    /**
+     * Creates window manager with specified window list supplier.
+     *
+     * @param windowListSupplier window list supplier
+     * @return new instance of {@link WindowManager}
+     * @throws NullPointerException if {@code windowListSupplier} is {@code null}
+     */
     static WindowManager windowManager(Supplier<ObservableList<Window>> windowListSupplier) {
-        return new WindowManager(windowListSupplier);
+        return new WindowManager(requireNonNull(windowListSupplier));
     }
 
     /**
@@ -38,7 +46,7 @@ public final class WindowManager {
      * @throws NullPointerException if {@code ctrlClass} is {@code null}
      */
     public Optional<Controller> find(Class<? extends Controller> ctrlClass) {
-        Objects.requireNonNull(ctrlClass, "Controller class cannot be null");
+        requireNonNull(ctrlClass, "Controller class must not be null");
         return getControllerStream(ctrlClass)
                 .findFirst();
     }
@@ -61,8 +69,8 @@ public final class WindowManager {
      * @throws NullPointerException if {@code ctrlClass} or {@code enumerator} is {@code null}
      */
     public Optional<Controller> find(Class<? extends Controller> ctrlClass, Predicate<Controller> enumerator) {
-        Objects.requireNonNull(ctrlClass, "Controller class cannot be null");
-        Objects.requireNonNull(enumerator, "Controller enumerator cannot be null");
+        requireNonNull(ctrlClass, "Controller class cannot be null");
+        requireNonNull(enumerator, "Controller enumerator cannot be null");
         return getControllerStream(ctrlClass)
                 .filter(enumerator)
                 .findFirst();
@@ -88,7 +96,7 @@ public final class WindowManager {
      * @throws NullPointerException if {@code ctrlClass} is {@code null}
      */
     public Stream<Controller> getControllerStream(Class<? extends Controller> ctrlClass) {
-        Objects.requireNonNull(ctrlClass, "Controller class cannot be null");
+        requireNonNull(ctrlClass, "Controller class cannot be null");
         return windowListSupplier.get().stream()
                 .map(Window::getScene)
                 .filter(w -> w.getUserData() != null && ctrlClass.equals(w.getUserData().getClass()))

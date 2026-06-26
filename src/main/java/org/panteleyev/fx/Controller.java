@@ -11,7 +11,8 @@ import javafx.stage.Stage;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Map;
-import java.util.Objects;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Implements base class for UI controller.
@@ -42,8 +43,10 @@ public class Controller {
      *
      * @param css CSS string
      * @return encoded style sheet
+     * @throws NullPointerException if {@code css} is {@code null}
      */
     public static String encodeStyleSheet(String css) {
+        requireNonNull(css, "css must not be null");
         return CSS_PREFIX + Base64.getEncoder().encodeToString(css.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -55,7 +58,7 @@ public class Controller {
      * @throws NullPointerException if {@code stage} is {@code null}
      */
     public Controller(Stage stage, String css) {
-        this.stage = Objects.requireNonNull(stage);
+        this.stage = requireNonNull(stage, "Stage must not be null");
         this.css = css;
     }
 
@@ -134,7 +137,7 @@ public class Controller {
     /**
      * Sets position of the controller stage.
      *
-     * @param position stage position. Ignored if {@code null}.
+     * @param position stage position, ignored if {@code null}.
      */
     public void setStagePosition(StagePosition position) {
         if (position == null) {
@@ -161,7 +164,7 @@ public class Controller {
     /**
      * Sets position and size of the controller stage.
      *
-     * @param positionAndSize stage position and size. Ignored if {@code null}.
+     * @param positionAndSize stage position and size, ignored if {@code null}.
      */
     public void setStagePositionAndSize(StagePositionAndSize positionAndSize) {
         if (positionAndSize == null) {
@@ -183,13 +186,17 @@ public class Controller {
      * @param accelerator key code combination
      * @param action      action
      * @throws IllegalStateException if scene is not set
+     * @throws NullPointerException  if {@code accelerator} or {@code action} is {@code null}
      */
     public void addAccelerator(KeyCodeCombination accelerator, Runnable action) {
         if (stage.getScene() == null) {
             throw new IllegalStateException("Scene is not set");
         }
 
-        stage.getScene().getAccelerators().put(accelerator, action);
+        stage.getScene().getAccelerators().put(
+                requireNonNull(accelerator, "Accelerator must not be null"),
+                requireNonNull(action, "Action must not be null")
+        );
     }
 
     /**
@@ -197,12 +204,15 @@ public class Controller {
      *
      * @param accelerators key code combinations with actions
      * @throws IllegalStateException if scene is not set
+     * @throws NullPointerException  if {@code accelerators} is {@code null}
      */
     public void addAccelerators(Map<KeyCodeCombination, Runnable> accelerators) {
         if (stage.getScene() == null) {
             throw new IllegalStateException("Scene is not set");
         }
 
-        stage.getScene().getAccelerators().putAll(accelerators);
+        stage.getScene().getAccelerators().putAll(
+                requireNonNull(accelerators, "Accelerators must not be null")
+        );
     }
 }

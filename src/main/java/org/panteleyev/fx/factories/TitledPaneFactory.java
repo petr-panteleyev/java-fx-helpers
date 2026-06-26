@@ -1,4 +1,4 @@
-// Copyright © 2025 Petr Panteleyev
+// Copyright © 2025-2026 Petr Panteleyev
 // SPDX-License-Identifier: BSD-2-Clause
 package org.panteleyev.fx.factories;
 

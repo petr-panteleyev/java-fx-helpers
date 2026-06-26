@@ -73,7 +73,9 @@ public final class GridPaneFactory {
         return build(rows, columnConstraints, styles);
     }
 
-    private static GridPane build(List<GridRow> rows, List<ColumnConstraints> columnConstraints, List<String> styles) {
+    private static GridPane build(List<GridRow> rows, List<ColumnConstraints> columnConstraints,
+            List<String> styles)
+    {
         var pane = new GridPane();
         if (styles != null && !styles.isEmpty()) {
             pane.getStyleClass().addAll(styles);
